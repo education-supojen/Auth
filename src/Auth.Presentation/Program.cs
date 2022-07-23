@@ -1,9 +1,9 @@
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Auth.Application;
 using Auth.Infrastructure;
 using Auth.Presentation;
-using Auth.WebApi;
-using Auth.WebApi.Filters;
+using Auth.Presentation.Middleware;
 using Serilog;
 
 
@@ -21,10 +21,11 @@ try
         builder.Host.UseSerilog();
 
         builder.Services
-            .AddControllers(opt => opt.Filters.Add<ExceptionFilter>())
+            .AddControllers()
             .AddJsonOptions(opt =>
             {
                 opt.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+                opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());  // Enum 轉成文字, 先試試看好不好用
             });
         
         
@@ -45,8 +46,10 @@ try
             app.UseOpenApi();
             app.UseSwaggerUi3();
         }
-        
-        app.UseSerilogRequestLogging();     
+
+        app.CheckHeader();
+        app.UseExceptionHandler("/error");
+        app.UseSerilogRequestLogging();
         app.UseHttpsRedirection();
         app.UseAuthorization();
         app.MapControllers();

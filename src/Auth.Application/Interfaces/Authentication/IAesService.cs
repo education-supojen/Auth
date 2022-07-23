@@ -1,4 +1,5 @@
 using Auth.Application.DTO;
+using Auth.Application.DTO.Services;
 
 namespace Auth.Application.Interfaces.Authentication;
 

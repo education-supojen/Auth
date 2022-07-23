@@ -1,4 +1,4 @@
-﻿FROM mcr.microsoft.com/dotnet/aspnet:6.0
+﻿FROM --platform=linux/amd64 mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /app
 ENV Logging__Console__FormatterName=simple
 EXPOSE 80

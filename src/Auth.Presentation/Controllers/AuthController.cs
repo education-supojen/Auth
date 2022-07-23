@@ -1,8 +1,15 @@
+using System.Reflection.Metadata;
+using System.Text.Json;
 using Auth.Application.Commands;
-using Auth.Application.Commands.FeatureAuth;
-using Auth.Application.Commands.FeatureRegistration;
+using Auth.Application.Commands.Feature.Auth;
 using Auth.Application.DTO;
+using Auth.Application.DTO.Feature.Auth;
 using Auth.Application.Queries;
+using Auth.Application.Queries.Feature.Auth;
+using Auth.Domain.Errors;
+using Auth.Presentation.Common;
+using Auth.Presentation.Contract.Feature.Auth;
+using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,111 +22,147 @@ namespace Auth.Presentation.Controllers;
 public class AuthController : BasicController
 {
     private readonly IMediator _mediator;
-    
-    public AuthController(IMediator mediator)
+    private readonly IMapper _mapper;
+
+    public AuthController(IMediator mediator,IMapper mapper) => (_mediator,_mapper) = (mediator,mapper);
+
+    /// <summary>
+    /// 網站人員 - 登入
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    [HttpPost("Staff/Login")]
+    [AllowAnonymous]
+    [OpenApiTag("Feature - Authentication (認證類)")]
+    public async Task<IActionResult> StaffEmailLoginAsync([FromBody]LoginRequest request)
     {
-        _mediator = mediator;
+        // Processing - 
+        var command = _mapper.Map<StaffLoginCommand>(request);
+        // Processing - 
+        var response = await _mediator.Send(command);
+        // Processing - 
+        return Handle(response);
+    }
+    
+    
+    /// <summary>
+    /// 使用者 - 登入
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    [HttpPost("User/Login")]
+    [AllowAnonymous]
+    [OpenApiTag("Feature - Authentication (認證類)")]
+    public async Task<IActionResult> UserEmailLoginAsync([FromBody]LoginRequest request)
+    {
+        // Processing - 
+        var command = _mapper.Map<UserLoginCommand>(request);
+        // Processing - 
+        var response = await _mediator.Send(command);
+        // Processing - 
+        return Handle(response);
     }
 
-    #region 註冊類
-    
     /// <summary>
-    /// 註冊 - 第一步
+    /// 網站人員 - 登出
     /// </summary>
-    /// <param name="command"></param>
     /// <returns></returns>
-    [HttpPost("Registration/Step/1")]
-    [OpenApiTags("註冊類")]
-    [AllowAnonymous]
-    public async Task<IActionResult> RegistrationStep1Async([FromBody]RegistrationStep1Command command)
+    [HttpPost("Staff/Logout")]
+    [OpenApiTag("Feature - Authentication (認證類)")]
+    public async Task<IActionResult> StaffLogoutAsync()
     {
-        await _mediator.Send(command);
-        return Ok();
+        // Processing- 
+        var response = await _mediator.Send(new StaffLogoutCommand(AccessToken));
+        // Processing - 
+        return Handle(response);
     }
     
     /// <summary>
-    /// 註冊 - 第二步
-    /// </summary>
-    /// <param name="command"></param>
-    /// <returns></returns>
-    [HttpPost("Registration/Step/2")]
-    [OpenApiTags("註冊類")]
-    [AllowAnonymous]
-    public async Task<IActionResult> RegistrationStep2Async([FromBody]RegistrationStep2Command command)
-    {
-        await _mediator.Send(command);
-        return Ok();
-    }
-    
-    /// <summary>
-    /// 註冊 - 第三步
-    /// </summary>
-    /// <param name="command"></param>
-    /// <returns></returns>
-    [HttpPost("Registration/Step/3")]
-    [OpenApiTags("註冊類")]
-    [AllowAnonymous]
-    [ProducesResponseType(typeof(TokenDto),200)]
-    public async Task<IActionResult> RegistrationStep3Async([FromBody]RegistrationStep3Command command)
-    {
-        var token = await _mediator.Send(command);
-        return Ok(token);
-    }
-    
-    #endregion
-    
-    
-    
-    /// <summary>
-    /// 登入 - 郵件號碼
-    /// </summary>
-    /// <param name="command"></param>
-    /// <returns></returns>
-    [HttpPost("Login/Email")]
-    [AllowAnonymous]
-    [OpenApiTag("登入(出)類")]
-    public async Task<ActionResult> EmailLoginAsync([FromBody]LoginCommand command)
-    {
-        var token = await _mediator.Send(command);
-        return Ok(token);
-    }
-    
-    /// <summary>
-    /// 登出
+    /// 使用者 - 登出
     /// </summary>
     /// <returns></returns>
-    [HttpPost("Logout")]
-    [OpenApiTag("登入(出)類")]
-    public async Task<ActionResult> LogoutAsync()
+    [HttpPost("User/Logout")]
+    [OpenApiTag("Feature - Authentication (認證類)")]
+    public async Task<IActionResult> UserLogoutAsync()
     {
-        await _mediator.Send(new LogoutCommand(Token));
-        throw new NotImplementedException();
-    }
-    
-    /// <summary>
-    /// Refresh Token
-    /// </summary>
-    /// <param name="command"></param>
-    /// <returns></returns>
-    [HttpPost("Refresh")]
-    [AllowAnonymous]
-    [OpenApiTag("登入(出)類")]
-    public async Task<ActionResult> RefreshTokenAsync([FromBody]RefreshTokenCommand command)
-    {
-        var token = await _mediator.Send(command);
-        return Ok(token);
+        // Processing - 
+        var response = await _mediator.Send(new UserLogoutCommand(AccessToken));
+        // Processing - 
+        return Handle(response);
     }
 
+    /// <summary>
+    /// 網站人員 - RefreshToekn
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    [HttpPost("Staff/Refresh")]
+    [AllowAnonymous]
+    [OpenApiTag("Feature - Authentication (認證類)")]
+    public async Task<IActionResult> StaffRefreshTokenAsync([FromBody] RefreshTokenRequest request)
+    {
+        // Processing - 
+        var command = _mapper.Map<StaffRefreshTokenCommand>(request);
+        // Processing - 
+        command.AccessToken = AccessToken;
+        // Processing -
+        var response = await _mediator.Send(command);
+        // Processing - 
+        return Handle(response);
+    }
+    
+    /// <summary>
+    /// 使用者 - Refresh Token
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    [HttpPost("User/Refresh")]
+    [AllowAnonymous]
+    [OpenApiTag("Feature - Authentication (認證類)")]
+    public async Task<IActionResult> UserRefreshTokenAsync([FromBody]RefreshTokenRequest request)
+    {
+        // Processing - 
+        var command = _mapper.Map<UserRefreshTokenCommand>(request);
+        // Processing - 
+        command.AccessToken = AccessToken;
+        // Processing -
+        var response = await _mediator.Send(command);
+        // Processing - 
+        return Handle(response);
+    }
+
+    /// <summary>
+    /// 取得 - 網站人員資訊
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("Staff/Information")]
+    [OpenApiTag("Feature - Authentication (認證類)")]
+    [ProducesResponseType(typeof(UserInformationDto),200)]
+    public async Task<IActionResult> StaffInformationAsync()
+    {
+        // Processing - 
+        var query = new StaffInformationQuery(AccessToken);
+        // Processing - 
+        var response = await _mediator.Send(query);
+        // Processing - 
+        return Handle(response);
+    }
+    
+    
     /// <summary>
     /// 取得 - 使用者資訊
     /// </summary>
-    /// <param name="ip"></param>
     /// <returns></returns>
-    [HttpGet("Information")]
-    [OpenApiTag("登入(出)類")]
-    public async Task<ActionResult> MemberInformationAsync()
+    [HttpGet("User/Information")]
+    [OpenApiTag("Feature - Authentication (認證類)")]
+    [ProducesResponseType(typeof(UserInformationDto),200)]
+    public async Task<IActionResult> UserInformationAsync()
     {
-        var userInformation= await _mediator.Send(new UserInformationQuery(Token));
-        return Ok(userInformation);
+        // Processing - 
+        var query = new UserInformationQuery(AccessToken);
+        // Processing - 
+        var response = await _mediator.Send(query);
+        // Processing - 
+        return Handle(response);
     }
 }

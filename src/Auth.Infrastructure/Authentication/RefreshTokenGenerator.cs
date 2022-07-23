@@ -8,14 +8,9 @@ namespace Auth.Infrastructure.Authentication;
 public class RefreshTokenGenerator : IRefreshTokenGenerator
 {
     private readonly IAesService _aesService;
-    private readonly JwtSettings _jwtSettings;
 
-    public RefreshTokenGenerator(IAesService aesService,IOptions<JwtSettings> jwtOptions)
-    {
-        _aesService = aesService;
-        _jwtSettings = jwtOptions.Value;
-    }
-
+    public RefreshTokenGenerator(IAesService aesService) => _aesService = aesService;
+    
     /// <summary>
     /// 計算 refresh Token
     /// </summary>
@@ -24,5 +19,15 @@ public class RefreshTokenGenerator : IRefreshTokenGenerator
     public string GenerateRefreshToken(User user)
     {
         return _aesService.EncryptECB(user.RefreshToken);
+    }
+
+    /// <summary>
+    /// 計算 refresh Token
+    /// </summary>
+    /// <param name="staff"></param>
+    /// <returns></returns>
+    public string GenerateRefreshToken(Staff staff)
+    {
+        return _aesService.EncryptECB(staff.RefreshToken);
     }
 }

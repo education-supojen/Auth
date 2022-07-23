@@ -43,7 +43,7 @@ public class PasswordHashService : IPasswordHashService
             numBytesRequested: 256 / 8);
 
         // Processing - 把計算的結果回傳
-        return new Password(HashPassword: Convert.ToBase64String(salt), Salt: Convert.ToBase64String(hashed));
+        return new Password(HashPassword: Convert.ToBase64String(hashed), Salt: Convert.ToBase64String(salt));
     }
 
     /// <summary>

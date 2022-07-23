@@ -1,6 +1,7 @@
 using System.Security.Cryptography;
 using System.Text;
 using Auth.Application.DTO;
+using Auth.Application.DTO.Services;
 using Auth.Application.Interfaces.Authentication;
 using Microsoft.Extensions.Options;
 

@@ -11,4 +11,22 @@
     <DocumentationFile>SwaggerModelXml\Auth.Domain.xml</DocumentationFile>
     <NoWarn>1701;1702;1591;1570;1587;8600;8602;8618;8767;8625;8603;</NoWarn>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>1701;1702;1591;1570;1587;0169;8618;8625;0108;0114;8603;</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="SwaggerModelXml\Auth.Domain.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="OneOf" Version="3.0.223" />
+  </ItemGroup>
+
+
 </Project>

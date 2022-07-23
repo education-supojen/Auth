@@ -1,28 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hr-auth-deployment
+  name: ecommerce-auth-deployment
   namespace: backend
   labels:
-    app: hr-auth-deployment
+    app: ecommerce-auth-deployment
 # Deployment 配置
 spec:
   replicas: 1
   # 選擇哪一些 pod 做配置
   selector:
     matchLabels:
-      app: hr-auth
+      app: ecommerce-auth
   template:
     metadata:
       labels:
-        app: hr-auth
+        app: ecommerce-auth
     # Deployement's pod's Configuration
     spec:
       imagePullSecrets:
         - name:  docker-registry
       containers:
-      - name: hr-auth
-        image: supojen/hr-auth:1.0.0
+      - name: ecommerce-auth
+        image: supojen/ecommerce-auth:1.0.0
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -37,11 +37,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: hr-auth-service
+  name: ecommerce-auth-service
   namespace: backend
 spec:
   selector:
-    app: hr-auth
+    app: ecommerce-auth
   type: ClusterIP
   ports:
   - protocol: TCP

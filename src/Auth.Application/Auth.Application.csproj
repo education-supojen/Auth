@@ -12,14 +12,26 @@
     <NoWarn>1701;1702;1591;1570;1587;8600;8602;8618;8767;8625;8603;</NoWarn>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>1701;1702;1591;1570;1587;0169;8618;8625;0108;0114;8603;</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="SwaggerModelXml\Auth.Application.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Auth.Domain\Auth.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="Mapster" Version="7.3.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
     <PackageReference Include="Scrutor" Version="4.2.0" />
   </ItemGroup>
 

@@ -4,116 +4,236 @@
         <name>Auth.Presentation</name>
     </assembly>
     <members>
-        <member name="P:Auth.Presentation.Contract.ErrorResponse.Code">
+        <member name="T:Auth.Presentation.Common.TokenInvalidException">
             <summary>
-            錯誤代碼
+            令牌錯誤 - 重新登入
             </summary>
         </member>
-        <member name="P:Auth.Presentation.Contract.ErrorResponse.Message">
+        <member name="T:Auth.Presentation.Common.TokenExpiredException">
             <summary>
-            錯誤訊息
+            令牌過期 - 更新令牌
             </summary>
         </member>
-        <member name="M:Auth.Presentation.Contract.ErrorResponse.#ctor(System.String)">
+        <member name="P:Auth.Presentation.Contract.Feature.Auth.LoginRequest.Email">
             <summary>
-            Basic Constructor
+            使用者 - 郵箱
             </summary>
-            <param name="message"></param>
+            <example>brian71742@gmail.com</example>
         </member>
-        <member name="M:Auth.Presentation.Contract.ErrorResponse.#ctor(Auth.Domain.Errors.Error)">
+        <member name="P:Auth.Presentation.Contract.Feature.Auth.LoginRequest.Password">
             <summary>
-            General Error
+            使用者 - 密碼
             </summary>
-            <param name="ex"></param>
+            <example>6XXXBXXX</example>
         </member>
-        <member name="M:Auth.Presentation.Contract.ErrorResponse.#ctor(Auth.Domain.Errors.BadRequestException)">
+        <member name="P:Auth.Presentation.Contract.Feature.Auth.LoginRequest.DeviceType">
             <summary>
-            Bad Request Error
+            Device Type
             </summary>
-            <param name="ex"></param>
+            <example>IPHONE 8</example>
         </member>
-        <member name="M:Auth.Presentation.Contract.ErrorResponse.#ctor(Auth.Domain.Errors.UnauthorizedException)">
+        <member name="P:Auth.Presentation.Contract.Feature.Auth.LoginRequest.DeviceToken">
             <summary>
-            Unauthorized Error
+            Device Token
             </summary>
-            <param name="ex"></param>
+            <example>null</example>
         </member>
-        <member name="M:Auth.Presentation.Contract.ErrorResponse.#ctor(Auth.Domain.Errors.ForbiddenException)">
-            <summary>
-            Forbidden Error
-            </summary>
-            <param name="ex"></param>
-        </member>
-        <member name="M:Auth.Presentation.Contract.ErrorResponse.#ctor(Auth.Domain.Errors.ConflictException)">
-            <summary>
-            Conflict Error
-            </summary>
-            <param name="ex"></param>
-        </member>
-        <member name="M:Auth.Presentation.Contract.ErrorResponse.#ctor(Auth.Domain.Errors.UnprocessableEntityException)">
-            <summary>
-            UnprocessableEntity Error
-            </summary>
-            <param name="ex"></param>
-        </member>
-        <member name="M:Auth.Presentation.Controllers.AuthController.RegistrationStep1Async(Auth.Application.Commands.FeatureRegistration.RegistrationStep1Command)">
-            <summary>
-            註冊 - 第一步
-            </summary>
-            <param name="command"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Auth.Presentation.Controllers.AuthController.RegistrationStep2Async(Auth.Application.Commands.FeatureRegistration.RegistrationStep2Command)">
-            <summary>
-            註冊 - 第二步
-            </summary>
-            <param name="command"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Auth.Presentation.Controllers.AuthController.RegistrationStep3Async(Auth.Application.Commands.FeatureRegistration.RegistrationStep3Command)">
-            <summary>
-            註冊 - 第三步
-            </summary>
-            <param name="command"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Auth.Presentation.Controllers.AuthController.EmailLoginAsync(Auth.Application.Commands.FeatureAuth.LoginCommand)">
-            <summary>
-            登入 - 郵件號碼
-            </summary>
-            <param name="command"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Auth.Presentation.Controllers.AuthController.LogoutAsync">
-            <summary>
-            登出
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Auth.Presentation.Controllers.AuthController.RefreshTokenAsync(Auth.Application.Commands.FeatureAuth.RefreshTokenCommand)">
+        <member name="P:Auth.Presentation.Contract.Feature.Auth.RefreshTokenRequest.RefreshToken">
             <summary>
             Refresh Token
             </summary>
-            <param name="command"></param>
+            <example>XXX</example>
+        </member>
+        <member name="P:Auth.Presentation.Contract.Feature.Auth.RefreshTokenRequest.DeviceType">
+            <summary>
+            裝置型號
+            </summary>
+            <example>IPHONE 8</example>
+        </member>
+        <member name="P:Auth.Presentation.Contract.Feature.Auth.RefreshTokenRequest.DeviceToken">
+            <summary>
+             裝置令牌
+            </summary>
+            <example>null</example>
+        </member>
+        <member name="P:Auth.Presentation.Contract.Feature.Reg.RegistrationStep1Request.Email">
+            <summary>
+            郵箱
+            </summary>
+            <example>supojen71742@gmail.com</example>
+        </member>
+        <member name="P:Auth.Presentation.Contract.Feature.Reg.RegistrationStep2Request.Email">
+            <summary>
+            郵箱
+            </summary>
+            <example>brian71742@gmail.com</example>
+        </member>
+        <member name="P:Auth.Presentation.Contract.Feature.Reg.RegistrationStep2Request.Code">
+            <summary>
+            驗證碼
+            </summary>
+            <example>123456</example>
+        </member>
+        <member name="P:Auth.Presentation.Contract.Feature.Reg.RegistrationStep3Request.Token">
+            <summary>
+            註冊用令牌
+            </summary>
+            <example>XXX</example>
+        </member>
+        <member name="P:Auth.Presentation.Contract.Feature.Reg.RegistrationStep3Request.Password">
+            <summary>
+            使用者密碼
+            </summary>
+            <example>OOO</example>
+        </member>
+        <member name="P:Auth.Presentation.Contract.Feature.Upt.UpdatePasswordStep1Request.Email">
+            <summary>
+            郵箱
+            </summary>
+            <example>brian71742@gmail.com</example>
+        </member>
+        <member name="P:Auth.Presentation.Contract.Feature.Upt.UpdatePasswordStep2Request.Email">
+            <summary>
+            郵箱
+            </summary>
+            <example>brian71742@gmail.com</example>
+        </member>
+        <member name="P:Auth.Presentation.Contract.Feature.Upt.UpdatePasswordStep2Request.Code">
+            <summary>
+            驗證碼
+            </summary>
+            <example>123456</example>
+        </member>
+        <member name="P:Auth.Presentation.Contract.Feature.Upt.UpdatePasswordStep3Request.Token">
+            <summary>
+            更新密碼令牌
+            </summary>
+            <example>XXX</example>
+        </member>
+        <member name="P:Auth.Presentation.Contract.Feature.Upt.UpdatePasswordStep3Request.Password">
+            <summary>
+            密碼
+            </summary>
+            <example>OOO</example>
+        </member>
+        <member name="M:Auth.Presentation.Controllers.AuthController.StaffEmailLoginAsync(Auth.Presentation.Contract.Feature.Auth.LoginRequest)">
+            <summary>
+            網站人員 - 登入
+            </summary>
+            <param name="request"></param>
             <returns></returns>
         </member>
-        <member name="M:Auth.Presentation.Controllers.AuthController.MemberInformationAsync">
+        <member name="M:Auth.Presentation.Controllers.AuthController.UserEmailLoginAsync(Auth.Presentation.Contract.Feature.Auth.LoginRequest)">
+            <summary>
+            使用者 - 登入
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Presentation.Controllers.AuthController.StaffLogoutAsync">
+            <summary>
+            網站人員 - 登出
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Presentation.Controllers.AuthController.UserLogoutAsync">
+            <summary>
+            使用者 - 登出
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Presentation.Controllers.AuthController.StaffRefreshTokenAsync(Auth.Presentation.Contract.Feature.Auth.RefreshTokenRequest)">
+            <summary>
+            網站人員 - RefreshToekn
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Presentation.Controllers.AuthController.UserRefreshTokenAsync(Auth.Presentation.Contract.Feature.Auth.RefreshTokenRequest)">
+            <summary>
+            使用者 - Refresh Token
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Presentation.Controllers.AuthController.StaffInformationAsync">
+            <summary>
+            取得 - 網站人員資訊
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Presentation.Controllers.AuthController.UserInformationAsync">
             <summary>
             取得 - 使用者資訊
             </summary>
-            <param name="ip"></param>
             <returns></returns>
         </member>
-        <member name="P:Auth.Presentation.Controllers.BasicController.Token">
+        <member name="P:Auth.Presentation.Controllers.BasicController.AccessToken">
             <summary>
             Access Token
             </summary>
         </member>
-        <member name="M:Auth.WebApi.Filters.ExceptionFilter.GetApiResponse(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)">
+        <member name="M:Auth.Presentation.Controllers.RegistrationController.StaffStep1sync(Auth.Presentation.Contract.Feature.Reg.RegistrationStep1Request)">
             <summary>
-            從 Exception 中產生 Api Response(回傳給 API 使用者的資訊)
+            後台人員註冊 - 第1步
             </summary>
-            <param name="context"></param>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Presentation.Controllers.RegistrationController.StaffStep2sync(Auth.Presentation.Contract.Feature.Reg.RegistrationStep2Request)">
+            <summary>
+            後台人員註冊 - 第2步
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Presentation.Controllers.RegistrationController.StaffStep3sync(Auth.Presentation.Contract.Feature.Reg.RegistrationStep3Request)">
+            <summary>
+            後台人員註冊 - 第3步
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Presentation.Controllers.RegistrationController.UserStep1Async(Auth.Presentation.Contract.Feature.Reg.RegistrationStep1Request)">
+            <summary>
+            會員註冊 - 第1步
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Presentation.Controllers.RegistrationController.UserStep2Async(Auth.Presentation.Contract.Feature.Reg.RegistrationStep2Request)">
+            <summary>
+            會員註冊 - 第2步
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Presentation.Controllers.RegistrationController.UserStep3Async(Auth.Presentation.Contract.Feature.Reg.RegistrationStep3Request)">
+            <summary>
+            會員註冊 - 第3步
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Presentation.Controllers.UpdateController.PasswordUpdateStep1Async(Auth.Presentation.Contract.Feature.Upt.UpdatePasswordStep1Request)">
+            <summary>
+            更改密碼 - 第一步
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Presentation.Controllers.UpdateController.PasswordUpdateStep2Async(Auth.Presentation.Contract.Feature.Upt.UpdatePasswordStep2Request)">
+            <summary>
+            更改密碼 - 第二步
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Presentation.Controllers.UpdateController.PasswordUpdateStep3Async(Auth.Presentation.Contract.Feature.Upt.UpdatePasswordStep3Request)">
+            <summary>
+            更改密碼 - 第三步
+            </summary>
+            <param name="request"></param>
             <returns></returns>
         </member>
     </members>

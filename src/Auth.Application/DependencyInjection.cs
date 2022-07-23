@@ -1,6 +1,5 @@
-using Auth.Application.Factories;
-using Auth.Domain.Factories;
-using Auth.Domain.Factories.Interface;
+using Auth.Application.Factories.Aggregates;
+using Auth.Domain.Factories.Aggregates;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -16,12 +15,9 @@ public static class DependencyInjection
         
         #region Domain Factory 配置
         services.AddSingleton<IRegistrationFactory, RegistrationFactory>();
+        services.AddSingleton<IPasswordUpdateFactory, PasswordUpdateFactory>();
         services.AddSingleton<IUserFactory, UserFactory>();
-        services.AddSingleton<ICompanyFactory, CompanyFactory>();
-        services.AddSingleton<IDepartmentFactory, DepartmentFactory>();
-        services.AddSingleton<IScheduleFactory, ScheduleFactory>();
-        services.AddSingleton<IShiftFactory, ShiftFactory>();
-        services.AddSingleton<IPunchGroupFactory, PunchGroupFactory>();
+        services.AddSingleton<IStaffFactory, StaffFactory>();
         #endregion
         
         return services;

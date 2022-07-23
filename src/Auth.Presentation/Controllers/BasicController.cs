@@ -1,6 +1,8 @@
+using Auth.Domain.Errors;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using OneOf;
 
 namespace Auth.Presentation.Controllers;
 
@@ -10,7 +12,7 @@ public class BasicController : ControllerBase
     /// <summary>
     /// Access Token
     /// </summary>
-    protected string Token
+    protected string AccessToken
     {
         get
         {
@@ -18,13 +20,15 @@ public class BasicController : ControllerBase
             return token;
         }
     }
-
-
-    protected string UserId
+    
+    public IActionResult Handle<T>(OneOf<T, Failure> response)
     {
-        get
-        {
-            return User.Identity.Name;
-        }
+        // Processing - 
+        return response.Match(
+            data => Ok(data),
+            failure => Problem(
+                statusCode: (int) failure.Type,
+                title: failure.Code,
+                detail: failure.Message)); 
     }
 }

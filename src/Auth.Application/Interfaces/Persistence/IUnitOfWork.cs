@@ -1,4 +1,6 @@
+using Auth.Domain.Errors;
 using Auth.Domain.Repositories;
+using OneOf;
 
 namespace Auth.Application.Interfaces.Persistence;
 
@@ -10,29 +12,33 @@ public interface IUnitOfWork
     IUserRepository UserRepository { get; }
     
     /// <summary>
-    /// 公司 - Repo
+    /// 後台人員 - Repository
     /// </summary>
-    ICompanyRepository CompanyRepository { get; }
+    IStaffRepository StaffRepository { get; }
 
     /// <summary>
-    /// Begin Transaction
+    /// 註冊 - Repo
     /// </summary>
-    void BeginTransaction();
+    IRegistrationRepository RegistrationRepository { get; }
 
+    /// <summary>
+    /// 更新密碼 - Repo
+    /// </summary>
+    IPasswordUpdateRepository PasswordUpdateRepository { get; }
+
+    /// <summary>
+    /// Automatically Commit Transaction
+    /// </summary>
+    Task<OneOf<bool,Failure>> SaveAggregatesAsync();
+    
     /// <summary>
     /// Begin Transaction (Async)
     /// </summary>
     Task BeginTransactionAsync();
 
     /// <summary>
-    /// Commit Transaction
-    /// </summary>
-    /// <returns></returns>
-    void Commit();
-
-    /// <summary>
     /// Commit Transaction (Async)
     /// </summary>
     /// <returns></returns>
-    Task CommitAsync();
+    Task<OneOf<bool,Failure>> CommitAsync();
 }

@@ -1,31 +1,65 @@
+using Auth.Application.Interfaces.Persistence;
 using Auth.Domain.Repositories;
+using Dapper;
 using Npgsql;
 
 namespace Auth.Infrastructure.Persistence.Dapper;
 
-public class MiniOrmDatabase : IMiniORMDatabase
+public class MiniORMDatabase : IMiniORMDatabase
 {
     /// <summary>
     /// Database 連線
     /// </summary>
-    public NpgsqlConnection Connection { get; }
+    protected NpgsqlConnection Connection { get; }
     
     /// <summary>
     /// Transaction
     /// </summary>
-    public NpgsqlTransaction Transaction { get; private set; }
+    protected NpgsqlTransaction Transaction { get; private set; }
 
-    public MiniOrmDatabase(NpgsqlConnection connection)
+    public MiniORMDatabase(NpgsqlConnection connection)
     {
         Connection = connection;
+        Connection.Open();
     }
 
     #region IUnitOfWork Interface
 
     /// <summary>
+    /// 搜尋多筆
+    /// </summary>
+    /// <param name="sql"></param>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    public async Task<IEnumerable<T>> QueryAsync<T>(string sql)
+    {
+        return await Connection.QueryAsync<T>(sql);
+    }
+
+    /// <summary>
+    /// 搜尋一比
+    /// </summary>
+    /// <param name="sql"></param>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    public async Task<T?> FindAsync<T>(string sql)
+    {
+        return await Connection.QueryFirstOrDefaultAsync<T>(sql);
+    }
+
+    /// <summary>
+    /// 執行運算
+    /// </summary>
+    /// <param name="sql"></param>
+    public async Task<int> ExecuteAsync(string sql)
+    {
+        return await Connection.ExecuteAsync(sql,transaction:Transaction);
+    }
+
+    /// <summary>
     /// Begin Transaction
     /// </summary>
-    public void Begin()
+    public void BeginTransaction()
     {
         //this._ctx.Database.BeginTransaction();
         Transaction = Connection.BeginTransaction();
@@ -34,7 +68,7 @@ public class MiniOrmDatabase : IMiniORMDatabase
     /// <summary>
     /// Begin Transaction (Async)
     /// </summary>
-    public async Task BeginAsync()
+    public async Task BeginTransactionAsync()
     {
         Transaction = await Connection.BeginTransactionAsync();
     }

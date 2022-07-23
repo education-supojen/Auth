@@ -10,4 +10,11 @@ public interface IRefreshTokenGenerator
     /// <param name="user"></param>
     /// <returns></returns>
     string GenerateRefreshToken(User user);
+    
+    /// <summary>
+    /// 計算 refresh Token
+    /// </summary>
+    /// <param name="staff"></param>
+    /// <returns></returns>
+    string GenerateRefreshToken(Staff staff);
 }

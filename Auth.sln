@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth.Infrastructure", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth.Presentation", "src\Auth.Presentation\Auth.Presentation.csproj", "{F9FA48DF-BDA0-4CC6-99EB-AE4AEB1EE0A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth.Shared", "src\Auth.Shared\Auth.Shared.csproj", "{5B945471-E28C-4BCF-863C-7CC37E90F013}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

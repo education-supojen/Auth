@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -5,8 +6,10 @@ using System.Text;
 using Auth.Application.Interfaces.Authentication;
 using Auth.Application.Interfaces.Services;
 using Auth.Domain.Errors;
+using Auth.Domain.ValueObjects;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using OneOf;
 
 namespace Auth.Infrastructure.Authentication;
 
@@ -41,10 +44,10 @@ public class JwtTokenGenerator : IJwtTokenGenerator
         // Processing -    
         var claims = new[]
         {
-            new Claim(JwtRegisteredClaimNames.Sub, _aesService.EncryptCBC(userId.ToString())), // 相當於 ID
-            new Claim(JwtRegisteredClaimNames.Jti, _aesService.EncryptCBC(securitystamp)),     // 想當於簽名
-            new Claim(JwtRegisteredClaimNames.Exp, exp.ToUniversalTime().ToString()),          // JWT 過期日
-            new Claim(JwtRegisteredClaimNames.Nbf, nbf.ToUniversalTime().ToString()),          // JWT 啟用日
+            new Claim(JwtRegisteredClaimNames.Sub, _aesService.EncryptCBC(userId.ToString())),                    // 相當於 ID
+            new Claim(JwtRegisteredClaimNames.Jti, _aesService.EncryptCBC(securitystamp)),                        // 想當於簽名
+            new Claim(JwtRegisteredClaimNames.Exp, exp.ToUniversalTime().ToString(CultureInfo.InvariantCulture)), // JWT 過期日
+            new Claim(JwtRegisteredClaimNames.Nbf, nbf.ToUniversalTime().ToString(CultureInfo.InvariantCulture)), // JWT 啟用日
         };
         
         // Processing - 產生簽名用的密鑰
@@ -57,8 +60,47 @@ public class JwtTokenGenerator : IJwtTokenGenerator
             issuer:_jwtSettings.Issuer,
             audience: _jwtSettings.Audience,
             claims:claims,
-            notBefore:nbf.DateTime,
-            expires:exp.DateTime,
+            notBefore:nbf,
+            expires:exp,
+            signingCredentials:signingCredentials);
+
+        // Processing - 產生 token 並且回傳
+        return new JwtSecurityTokenHandler().WriteToken(token);
+    }
+
+    /// <summary>
+    /// 生產 Jwt Token
+    /// </summary>
+    /// <param name="sub"></param>
+    /// <param name="jti"></param>
+    /// <returns></returns>
+    public string GenerateToken(string sub, string jti)
+    {
+        // Processing - 
+        var nbf = _dateTimeProvider.Now;
+        var exp = _dateTimeProvider.Now.AddMinutes(_jwtSettings.ExpiryMinutes);
+
+        // Processing -    
+        var claims = new[]
+        {
+            new Claim(JwtRegisteredClaimNames.Sub, _aesService.EncryptCBC(sub)),                                  // 相當於 ID
+            new Claim(JwtRegisteredClaimNames.Jti, _aesService.EncryptCBC(jti)),                                  // 想當於簽名
+            new Claim(JwtRegisteredClaimNames.Exp, exp.ToUniversalTime().ToString(CultureInfo.InvariantCulture)), // JWT 過期日
+            new Claim(JwtRegisteredClaimNames.Nbf, nbf.ToUniversalTime().ToString(CultureInfo.InvariantCulture)), // JWT 啟用日
+        };
+        
+        // Processing - 產生簽名用的密鑰
+        var secretBytes = Encoding.UTF8.GetBytes(_jwtSettings.Secret);
+        var key = new SymmetricSecurityKey(secretBytes);
+        var signingCredentials = new SigningCredentials(key,SecurityAlgorithms.HmacSha256);
+
+        // Processing - 設定製造 token 的參數
+        var token = new JwtSecurityToken(
+            issuer:_jwtSettings.Issuer,
+            audience: _jwtSettings.Audience,
+            claims:claims,
+            notBefore:nbf,
+            expires:exp,
             signingCredentials:signingCredentials);
 
         // Processing - 產生 token 並且回傳
@@ -71,7 +113,7 @@ public class JwtTokenGenerator : IJwtTokenGenerator
     /// </summary>
     /// <param name="stream">Jwt Token</param>
     /// <returns></returns>
-    public (string sub,string jti) ReadSubAndJti(string stream)
+    public OneOf<JwtTokenVariables, Failure> ReadSubAndJti(string stream)
     {
         // Processing - 
         var token = new JwtSecurityTokenHandler().ReadJwtToken(stream);
@@ -86,9 +128,10 @@ public class JwtTokenGenerator : IJwtTokenGenerator
         string newSign = HashBy256(secret:_jwtSettings.Secret, $"{items[0]}.{items[1]}");
 
         // Processing - 
-        if (oldSign != newSign) throw Errors.Token.TokenInvalid;
+        if (oldSign != newSign) return Failures.Token.TokenInvalid;
 
-        return (sub, jti);
+        // Processing - 解碼後再返回
+        return  new JwtTokenVariables(_aesService.DecryptCBC(sub), _aesService.DecryptCBC(jti));
     }
     
     /// <summary>

@@ -4,5 +4,5 @@ namespace Auth.Infrastructure.Services;
 
 public class DateTimeProvider : IDateTimeProvider
 {
-    public DateTimeOffset Now => DateTimeOffset.UtcNow;
+    public DateTime Now => DateTime.UtcNow;
 }

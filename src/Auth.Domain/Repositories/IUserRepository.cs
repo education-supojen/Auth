@@ -5,6 +5,27 @@ namespace Auth.Domain.Repositories;
 public interface IUserRepository
 {
     /// <summary>
+    /// 處存到快取
+    /// </summary>
+    /// <param name="user"></param>
+    /// <returns></returns>
+    Task CacheAddAsync(User user);
+    
+    /// <summary>
+    /// 從快取取得使用者
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    Task<User?> CacheGetAsync(long id);
+
+    /// <summary>
+    /// 刪除快取
+    /// </summary>
+    /// <param name="user"></param>
+    /// <returns></returns>
+    Task CacheDeleteAsync(User user);
+    
+    /// <summary>
     /// 取得使用者
     /// </summary>
     /// <param name="id"></param>
@@ -23,12 +44,12 @@ public interface IUserRepository
     /// </summary>
     /// <param name="user"></param>
     /// <returns></returns>
-    Task AddAsync(User user);
+    void Add(User user);
 
     /// <summary>
     /// 更新使用者
     /// </summary>
     /// <param name="user"></param>
     /// <returns></returns>
-    Task UpdateAsync(User user);
+    void Update(User user);
 }

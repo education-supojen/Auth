@@ -12,7 +12,19 @@
     <NoWarn>1701;1702;1591;1570;1587;8600;8602;8618;8767;8625;8603;</NoWarn>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>1701;1702;1591;1570;1587;0169;8618;8625;0108;0114;8603;</NoWarn>
+  </PropertyGroup>
+
   <ItemGroup>
+    <Content Include="SwaggerModelXml\Auth.Presentation.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Mapster.DependencyInjection" Version="1.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
     <PackageReference Include="NSwag.AspNetCore" Version="13.16.1" />
     <PackageReference Include="NSwag.Core" Version="13.16.1" />
@@ -26,7 +38,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Auth.Application\Auth.Application.csproj" />
     <ProjectReference Include="..\Auth.Infrastructure\Auth.Infrastructure.csproj" />
-    <ProjectReference Include="..\Auth.Shared\Auth.Shared.csproj" />
   </ItemGroup>
 
 </Project>
