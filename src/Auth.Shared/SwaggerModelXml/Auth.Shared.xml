@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Auth.Shared</name>
+    </assembly>
+    <members>
+        <member name="M:Auth.Shared.Profiles.BaseProfile.#ctor">
+            <summary>
+            Extra:
+                轉成 ImmutableArray 的原因, IEnumerable 是不能更改內容的, ImmutableArray 才行
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Auth.Shared.Profiles.BaseProfile.LoadIMapping(System.Collections.Generic.IEnumerable{System.Type})" -->
+        <!-- Badly formed XML comment ignored for member "T:Auth.Shared.Profiles.TypeExtensions" -->
+        <!-- Badly formed XML comment ignored for member "M:Auth.Shared.Profiles.TypeExtensions.IsInterfaceTypeEqualToIMapping(System.Type)" -->
+        <member name="M:Auth.Shared.Profiles.TypeExtensions.IsInterfaceTypeEqualToIMappingCustomSetting(System.Type)">
+            <summary>
+            Description - 
+                檢查型別是否可以被指定給 IMappingCustomSetting interface
+            Extra - 
+                Type.IsAssignableFrom(Type)
+                    Determines whether an instance of a specified type c can be assigned to a variable of the current type.
+            給予另外一個型別
+            </summary>
+            <param name="t"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Auth.Shared.Profiles.DependencyInjection">
+            <summary>
+            Profile Dependency Injection
+            </summary>
+        </member>
+    </members>
+</doc>

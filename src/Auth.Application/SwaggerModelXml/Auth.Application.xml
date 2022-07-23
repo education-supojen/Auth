@@ -1,0 +1,427 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Auth.Application</name>
+    </assembly>
+    <members>
+        <member name="P:Auth.Application.Commands.FeatureAuth.LoginCommand.Email">
+            <summary>
+            使用者 - 郵箱
+            </summary>
+        </member>
+        <member name="P:Auth.Application.Commands.FeatureAuth.LoginCommand.Password">
+            <summary>
+            使用者 - 密碼
+            </summary>
+        </member>
+        <member name="P:Auth.Application.Commands.FeatureAuth.LoginCommand.DeviceType">
+            <summary>
+            Device Type
+            </summary>
+        </member>
+        <member name="P:Auth.Application.Commands.FeatureAuth.LoginCommand.DeviceToken">
+            <summary>
+            Device Token
+            </summary>
+        </member>
+        <member name="P:Auth.Application.Commands.FeatureAuth.RefreshTokenCommand.AccessToken">
+            <summary>
+            Access Token
+            </summary>
+        </member>
+        <member name="P:Auth.Application.Commands.FeatureAuth.RefreshTokenCommand.RefreshToken">
+            <summary>
+            Refresh Token
+            </summary>
+        </member>
+        <member name="P:Auth.Application.Commands.FeatureAuth.RefreshTokenCommand.DeviceType">
+            <summary>
+            裝置型號
+            </summary>
+        </member>
+        <member name="P:Auth.Application.Commands.FeatureAuth.RefreshTokenCommand.DeviceToken">
+            <summary>
+             裝置令牌
+            </summary>
+        </member>
+        <member name="P:Auth.Application.Commands.FeatureBackstage.AddEmployeeCommand.CompanyId">
+            <summary>
+            公司 ID
+            </summary>
+        </member>
+        <member name="P:Auth.Application.Commands.FeatureBackstage.AddEmployeeCommand.Name">
+            <summary>
+            使用者名稱
+            </summary>
+        </member>
+        <member name="P:Auth.Application.Commands.FeatureBackstage.AddEmployeeCommand.Email">
+            <summary>
+            使用者郵箱
+            </summary>
+        </member>
+        <member name="P:Auth.Application.Commands.FeatureBackstage.AddEmployeeCommand.Title">
+            <summary>
+            使用者職稱
+            </summary>
+        </member>
+        <member name="P:Auth.Application.Commands.FeatureBackstage.AddEmployeeCommand.BoardingTime">
+            <summary>
+            使用者入職時間
+            </summary>
+        </member>
+        <member name="P:Auth.Application.Commands.FeatureBackstage.AddEmployeeCommand.Permission">
+            <summary>
+            權限
+            </summary>
+        </member>
+        <member name="P:Auth.Application.Commands.FeatureBackstage.AddEmployeeCommand.DepartmentId">
+            <summary>
+            部門 ID
+            </summary>
+        </member>
+        <member name="M:Auth.Application.Commands.FeatureRegistration.Handler.RegistrationStep1Handler.Handle(Auth.Application.Commands.FeatureRegistration.RegistrationStep1Command,System.Threading.CancellationToken)">
+            <summary>
+            註冊 - 第一步
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Auth.Application.Commands.FeatureRegistration.RegistrationStep1Command.Email">
+            <summary>
+            郵箱
+            </summary>
+            <example>supojen71742@gmail.com</example>
+        </member>
+        <member name="P:Auth.Application.Commands.FeatureRegistration.RegistrationStep2Command.Email">
+            <summary>
+            郵箱
+            </summary>
+            <example>brian71742@gmail.com</example>
+        </member>
+        <member name="P:Auth.Application.Commands.FeatureRegistration.RegistrationStep2Command.Code">
+            <summary>
+            驗證碼
+            </summary>
+            <example>123456</example>
+        </member>
+        <member name="P:Auth.Application.Commands.FeatureRegistration.RegistrationStep3Command.Email">
+            <summary>
+            使用者 - 郵箱
+            </summary>
+            <example>brina71742@gmail.com</example>
+        </member>
+        <member name="P:Auth.Application.Commands.FeatureRegistration.RegistrationStep3Command.UserName">
+            <summary>
+            使用者 - 名稱
+            </summary>
+            <example>蘇柏仁</example>
+        </member>
+        <member name="P:Auth.Application.Commands.FeatureRegistration.RegistrationStep3Command.CompanyName">
+            <summary>
+            公司 - 名稱
+            </summary>
+            <example>六國景觀設計有限公司</example>
+        </member>
+        <member name="P:Auth.Application.Commands.FeatureRegistration.RegistrationStep3Command.Latitude">
+            <summary>
+            緯度
+            </summary>
+            <example>25.061279028690652</example>
+        </member>
+        <member name="P:Auth.Application.Commands.FeatureRegistration.RegistrationStep3Command.Longitude">
+            <summary>
+            經度
+            </summary>
+            <example>121.53984066717152</example>
+        </member>
+        <member name="P:Auth.Application.Commands.FeatureRegistration.RegistrationStep3Command.FormattedAddress">
+            <summary>
+            完整地址
+            </summary>
+            <example>10491台北市中山區龍江路286巷16號1樓</example>
+        </member>
+        <member name="P:Auth.Application.Commands.FeatureRegistration.RegistrationStep3Command.Password">
+             <summary>
+            使用者密碼
+             </summary>
+             <example>6705Brian</example>
+        </member>
+        <member name="P:Auth.Application.Commands.FeatureRegistration.RegistrationStep3Command.DeviceType">
+            <summary>
+            哪種裝置註冊完成
+            </summary>
+            <example>IPHONE 8</example>
+        </member>
+        <member name="P:Auth.Application.Commands.FeatureRegistration.RegistrationStep3Command.DeviceToken">
+            <summary>
+            Device Token (Mobile 才有)
+            </summary>
+            <example>XXOOXX</example>
+        </member>
+        <member name="P:Auth.Application.Commands.FeatureUpdate.UpdatePasswordStep1Command.Email">
+            <summary>
+            郵箱
+            </summary>
+        </member>
+        <member name="P:Auth.Application.Commands.FeatureUpdate.UpdatePasswordStep2Command.Email">
+            <summary>
+            郵箱
+            </summary>
+        </member>
+        <member name="P:Auth.Application.Commands.FeatureUpdate.UpdatePasswordStep2Command.Code">
+            <summary>
+            驗證碼
+            </summary>
+        </member>
+        <member name="P:Auth.Application.Commands.FeatureUpdate.UpdatePasswordStep3Command.Email">
+            <summary>
+            郵箱
+            </summary>
+        </member>
+        <member name="P:Auth.Application.Commands.FeatureUpdate.UpdatePasswordStep3Command.Password">
+            <summary>
+            密碼
+            </summary>
+        </member>
+        <member name="P:Auth.Application.Commands.FeatureUpdate.UpdatePasswordStep3Command.PasswordConfirmed">
+            <summary>
+            密碼確認
+            </summary>
+        </member>
+        <member name="P:Auth.Application.DTO.AesKeyDto.Key">
+            <summary>
+            CBC AES Key
+            </summary>
+        </member>
+        <member name="P:Auth.Application.DTO.AesKeyDto.IV">
+            <summary>
+            CBC AES Initial vectors
+            </summary>
+        </member>
+        <member name="M:Auth.Application.DTO.AesKeyDto.op_Implicit(Auth.Application.DTO.AesKeyDto)~System.ValueTuple{System.String,System.String}">
+            <summary>
+            Implicit Casting Operator
+            AesKeyDto to tuple
+            </summary>
+            <param name="response"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Auth.Application.DTO.TokenDto.AccessToken">
+            <summary>
+            Access Token
+            </summary>
+        </member>
+        <member name="P:Auth.Application.DTO.TokenDto.RefreshToken">
+            <summary>
+            Refresh Token
+            </summary>
+        </member>
+        <member name="P:Auth.Application.DTO.UserDto.Email">
+            <summary>
+             使用者 - 郵箱
+            </summary>
+        </member>
+        <member name="P:Auth.Application.DTO.UserInformationDto.Id">
+            <summary>
+            ID
+            </summary>
+        </member>
+        <member name="P:Auth.Application.DTO.UserInformationDto.Email">
+            <summary>
+            郵箱
+            </summary>
+        </member>
+        <member name="M:Auth.Application.Factories.CompanyFactory.Create(System.String,Auth.Domain.ValueObjects.Location,Auth.Domain.Aggregates.User)">
+            <summary>
+            建立公司
+            </summary>
+            <param name="name">公司的名稱</param>
+            <param name="location">公司的位置</param>
+            <param name="user">建立公司的使用者</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Application.Factories.PunchGroupFactory.Create(Auth.Domain.ValueObjects.Location)">
+            <summary>
+            建立表準打卡群組
+            </summary>
+            <param name="location"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Application.Factories.ShiftFactory.Create">
+            <summary>
+            建立標準輪班表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Application.Factories.UserFactory.Create(System.String,System.String,Auth.Domain.ValueObjects.Password)">
+            <summary>
+            註冊新用戶
+            </summary>
+            <param name="name"></param>
+            <param name="email"></param>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Application.Factories.UserFactory.CreateAsync(System.String,System.String,System.String,System.DateOnly)">
+            <summary>
+            建立公司成員
+            </summary>
+            <param name="name"></param>
+            <param name="email"></param>
+            <param name="title"></param>
+            <param name="boardingTime"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Application.Interfaces.Authentication.IAesService.AesEncryptKey">
+            <summary>
+            產生一組 (密鑰, Initial vector) 做 AES-CBC 文本加密用的
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Application.Interfaces.Authentication.IAesService.EncryptCBC(System.String)">
+            <summary>
+            AES-CBC 文本加密
+            </summary>
+            <param name="text">文本</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Application.Interfaces.Authentication.IAesService.EncryptECB(System.String)">
+            <summary>
+            AES-EBC 文本加密 (不需要 Initial Vector 但相對不安全)
+            </summary>
+            <param name="text">文本</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Application.Interfaces.Authentication.IAesService.DecryptCBC(System.String)">
+            <summary>
+            AES-CBC 文本解密 
+            </summary>
+            <param name="text"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Application.Interfaces.Authentication.IAesService.DecryptECB(System.String)">
+            <summary>
+            AES-EBC 文本解密 (不需要 Initial Vector 但相對不安全)
+            </summary>
+            <param name="text"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Application.Interfaces.Authentication.IJwtTokenGenerator.GenerateToken(System.Int64,System.String)">
+            <summary>
+            生產 Jwt Token
+            </summary>
+            <param name="userId"></param>
+            <param name="securitystamp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Application.Interfaces.Authentication.IJwtTokenGenerator.ReadSubAndJti(System.String)">
+            <summary>
+            解讀 Access Token Sub(身份 ID) and Jti(簽名)
+            (對 jwt token 做基本驗證)
+            </summary>
+            <param name="stream">Jwt Token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Application.Interfaces.Authentication.IPasswordGenerator.Generate">
+            <summary>
+            亂數產生密碼
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Application.Interfaces.Authentication.IPasswordHashService.Pbkdf2(System.String)">
+            <summary>
+            使用者密碼 Pbkdf2 哈希
+            </summary>
+            <param name="password"></param>
+            <returns>
+                (byte[] salt, string saltStr, byte[] hashed, string hashedStr)
+                (鹽byte形式,鹽base64形式,密碼byte形式,密碼base64形式)
+            </returns>
+        </member>
+        <member name="M:Auth.Application.Interfaces.Authentication.IPasswordHashService.PasswordValidation(System.String,System.String,System.String)">
+            <summary>
+            檢查密碼是否合法(使用者輸入的密碼是否正確)
+            </summary>
+            <param name="password"></param>
+            <param name="hashPassword"></param>
+            <param name="salt"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Application.Interfaces.Authentication.IRefreshTokenGenerator.GenerateRefreshToken(Auth.Domain.Aggregates.User)">
+            <summary>
+            計算 refresh Token
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Auth.Application.Interfaces.Persistence.IUnitOfWork.UserRepository">
+            <summary>
+            使用者 - Repo
+            </summary>
+        </member>
+        <member name="P:Auth.Application.Interfaces.Persistence.IUnitOfWork.CompanyRepository">
+            <summary>
+            公司 - Repo
+            </summary>
+        </member>
+        <member name="M:Auth.Application.Interfaces.Persistence.IUnitOfWork.BeginTransaction">
+            <summary>
+            Begin Transaction
+            </summary>
+        </member>
+        <member name="M:Auth.Application.Interfaces.Persistence.IUnitOfWork.BeginTransactionAsync">
+            <summary>
+            Begin Transaction (Async)
+            </summary>
+        </member>
+        <member name="M:Auth.Application.Interfaces.Persistence.IUnitOfWork.Commit">
+            <summary>
+            Commit Transaction
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Application.Interfaces.Persistence.IUnitOfWork.CommitAsync">
+            <summary>
+            Commit Transaction (Async)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Application.Interfaces.Services.IEmailMediator.RegistrationWithEmailAsync(System.String,System.Int32)">
+            <summary>
+            發送 - 驗證碼 - 註冊
+            </summary>
+            <param name="email"></param>
+            <param name="code"></param>
+        </member>
+        <member name="M:Auth.Application.Interfaces.Services.IEmailMediator.LoginWithEmailAsync(System.String,System.Int32)">
+            <summary>
+            發送 - 驗證碼 - 登入
+            </summary>
+            <param name="email"></param>
+            <param name="code"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Application.Interfaces.Services.IEmailMediator.SendEmployeePasswordAsync(System.String,System.String,System.String)">
+            <summary>
+            發送 - 新成員初始密碼
+            </summary>
+            <param name="email"></param>
+            <param name="newMemberName"></param>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Application.Interfaces.Services.IIdentityProducer.GetId">
+            <summary>
+            生產一個 ID 出來
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Domain.Factories.ScheduleFactory.Create">
+            <summary>
+            建立標準工作表
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

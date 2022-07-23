@@ -1,0 +1,840 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Auth.Domain</name>
+    </assembly>
+    <members>
+        <member name="P:Auth.Domain.Aggregates.AggregateRoot.Modification">
+            <summary>
+            Aggregation 是否有更新 ,,
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.AggregateRoot.UpdateTime">
+            <summary>
+            更新時間
+            </summary>
+        </member>
+        <member name="M:Auth.Domain.Aggregates.AggregateRoot.Modify">
+            <summary>
+            紀錄 Aggregation 被更新過了
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.AggregateRoot.Events">
+            <summary>
+            事件
+            </summary>
+        </member>
+        <member name="M:Auth.Domain.Aggregates.AggregateRoot.AddEvent(Auth.Domain.Events.IDomainEvent)">
+            <summary>
+            增加事件
+            </summary>
+            <param name="event"></param>
+        </member>
+        <member name="M:Auth.Domain.Aggregates.AggregateRoot.ClearEvents">
+            <summary>
+             清掉所有 event
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.Company.Id">
+            <summary>
+            公司 ID
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.Company.Name">
+            <summary>
+            公司名稱
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.Company.Latitude">
+            <summary>
+            緯度
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.Company.Longitude">
+            <summary>
+            經度
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.Company.Address">
+            <summary>
+            完整地址
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.Company.Departments">
+            <summary>
+            部門
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.Company.Schedules">
+            <summary>
+            工作表
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.Company.Shifts">
+            <summary>
+            輪班
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.Company.PunchSettings">
+            <summary>
+            打卡群組
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.Company.Users">
+            <summary>
+            公司人員
+            </summary>
+        </member>
+        <member name="M:Auth.Domain.Aggregates.Company.AddUserAsAdmin(Auth.Domain.Aggregates.User)">
+            <summary>
+             加入使用者 - 最大權限
+            </summary>
+            <param name="user"></param>
+        </member>
+        <member name="M:Auth.Domain.Aggregates.Company.AddUserAsBackstageManager(Auth.Domain.Aggregates.User)">
+            <summary>
+            加入使用者 - 後台權限
+            </summary>
+            <param name="user"></param>
+        </member>
+        <member name="M:Auth.Domain.Aggregates.Company.AddUserAsManager(Auth.Domain.Aggregates.User)">
+            <summary>
+             加入使用者 - 主管權限
+            </summary>
+            <param name="user"></param>
+        </member>
+        <member name="M:Auth.Domain.Aggregates.Company.AddUserAsEmployee(Auth.Domain.Aggregates.User)">
+            <summary>
+             加入使用者 - 員工權限
+            </summary>
+            <param name="user"></param>
+        </member>
+        <member name="M:Auth.Domain.Aggregates.Company.AddDepartment(Auth.Domain.Aggregates.Department)">
+            <summary>
+            新增部門
+            </summary>
+            <param name="department"></param>
+        </member>
+        <member name="M:Auth.Domain.Aggregates.Company.AddSchedule(Auth.Domain.Aggregates.Schedule)">
+            <summary>
+            新增工作表
+            </summary>
+            <param name="schedule"></param>
+        </member>
+        <member name="M:Auth.Domain.Aggregates.Company.AddShift(Auth.Domain.Aggregates.Shift)">
+            <summary>
+            新增輪班
+            </summary>
+            <param name="shift"></param>
+        </member>
+        <member name="M:Auth.Domain.Aggregates.Company.AddPunchGroup(Auth.Domain.Aggregates.PunchGroup)">
+            <summary>
+            新增打卡群組
+            </summary>
+            <param name="punchGroup"></param>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.Department.Id">
+            <summary>
+            部門 ID
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.Department.Name">
+            <summary>
+            部門名稱
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.Department.Company">
+            <summary>
+            屬於哪家公司
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.Department.Users">
+            <summary>
+            使用者
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.IEntityBase`1.Id">
+            <summary>
+            每一個 entity 都必須要有一個獨一無二的 Identity
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.PunchGroup.Id">
+            <summary>
+            打卡設定 ID
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.PunchGroup.Name">
+            <summary>
+            打卡設定名稱
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.PunchGroup.Latitude">
+            <summary>
+            緯度
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.PunchGroup.Longitude">
+            <summary>
+            經度
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.PunchGroup.Address">
+            <summary>
+            地址
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.PunchGroup.ValidDistance">
+            <summary>
+            打卡有效距離
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.PunchGroup.Company">
+            <summary>
+            屬於哪家公司
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.PunchGroup.Users">
+            <summary>
+            使用者
+            </summary>
+        </member>
+        <member name="T:Auth.Domain.Aggregates.Registration">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.Registration.Id">
+            <summary>
+            登記郵箱當作 Identity
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.Registration.RemainTry">
+            <summary>
+            剩下幾次嘗試機會
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.Registration.Code">
+            <summary>
+            驗證碼
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.Registration.BeenVerified">
+            <summary>
+            是否驗證通過
+            </summary>
+        </member>
+        <member name="M:Auth.Domain.Aggregates.Registration.#ctor">
+            <summary>
+            給 Infrastructure 端 Persistence 用的
+            </summary>
+        </member>
+        <member name="M:Auth.Domain.Aggregates.Registration.#ctor(System.String)">
+            <summary>
+            給 Factory 建立註冊資量用的
+            </summary>
+            <param name="email"></param>
+        </member>
+        <member name="M:Auth.Domain.Aggregates.Registration.VerifyCode(System.Int32)">
+            <summary>
+            驗證驗證碼, 成功返回 true, 失敗返回 false 
+            </summary>
+            <param name="code"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.Schedule.Id">
+            <summary>
+            工作表 ID
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.Schedule.Name">
+            <summary>
+            工作表名稱
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.Schedule.Weekend">
+            <summary>
+            週休安排
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.Schedule.Company">
+            <summary>
+            屬於哪家公司
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.Schedule.Users">
+            <summary>
+            使用者
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.Shift.Id">
+            <summary>
+            輪班 ID
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.Shift.Name">
+            <summary>
+            輪班名稱
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.Shift.StartTime">
+            <summary>
+            上班時間
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.Shift.EndTime">
+            <summary>
+            下班時間
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.Shift.StartBreakTime">
+            <summary>
+            開始休息時間
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.Shift.EndBreakTime">
+            <summary>
+            結束休息時間
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.Shift.FlexibleRange">
+            <summary>
+            彈性範圍(分鐘)
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.Shift.Company">
+            <summary>
+            屬於哪家公司
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.Shift.Users">
+            <summary>
+            使用者
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.User.Id">
+            <summary>
+            使用者 - ID
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.User.Number">
+            <summary>
+            使用者 - 代號
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.User.Email">
+            <summary>
+             使用者 - 郵箱
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.User.EmailConfirmed">
+            <summary>
+            郵箱是否確認了
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.User.PasswordHash">
+            <summary>
+            密碼哈希
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.User.Salt">
+            <summary>
+            鹽
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.User.BoardingTime">
+            <summary>
+            入職時間
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.User.Title">
+            <summary>
+            職稱
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.User.Name">
+            <summary>
+            使用者姓名
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.User.SecurityStamp">
+            <summary>
+            安全鎖
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.User.RefreshToken">
+            <summary>
+            Refresh Token
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.User.RefreshTokenExpiryTime">
+            <summary>
+            Refresh Token 過期時間
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.User.Permission">
+            <summary>
+            權限
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.User.Manager">
+            <summary>
+            主管
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.User.DeviceToken">
+            <summary>
+            登入裝置令牌
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.User.DeviceType">
+            <summary>
+            登入裝置型號
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.User.Company">
+            <summary>
+            屬於哪家公司
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.User.Subordinates">
+            <summary>
+            下屬
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.User.Department">
+            <summary>
+            部門
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.User.Schedule">
+            <summary>
+            工作表
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.User.Shift">
+            <summary>
+            輪班
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Aggregates.User.PunchGroup">
+            <summary>
+            打卡設定
+            </summary>
+        </member>
+        <member name="M:Auth.Domain.Aggregates.User.#ctor(System.Int64,System.String,System.String,System.String,Auth.Domain.ValueObjects.Password)">
+            <summary>
+            申請後台帳號
+            </summary>
+            <param name="id"></param>
+            <param name="name"></param>
+            <param name="title"></param>
+            <param name="email"></param>
+            <param name="password"></param>
+        </member>
+        <member name="M:Auth.Domain.Aggregates.User.#ctor(System.Int64,System.String,System.String,Auth.Domain.ValueObjects.Password,System.DateOnly,System.String)">
+            <summary>
+            後台人員建立使用者
+            </summary>
+            <param name="id"></param>
+            <param name="name"></param>
+            <param name="email"></param>
+            <param name="password"></param>
+            <param name="boardingTime"></param>
+            <param name="title"></param>
+        </member>
+        <member name="M:Auth.Domain.Aggregates.User.AssignNumberToUser">
+            <summary>
+            指定編號給使用者
+            </summary>
+        </member>
+        <member name="M:Auth.Domain.Aggregates.User.AssignUserToDepartment(Auth.Domain.Aggregates.Department)">
+            <summary>
+            指定使用者進入部門
+            </summary>
+            <param name="department"></param>
+        </member>
+        <member name="M:Auth.Domain.Aggregates.User.AssignUserToSchedule(Auth.Domain.Aggregates.Schedule)">
+            <summary>
+            指定使用者進入工作表
+            </summary>
+            <param name="schedule"></param>
+        </member>
+        <member name="M:Auth.Domain.Aggregates.User.AssignUserToShift(Auth.Domain.Aggregates.Shift)">
+            <summary>
+            指定使用者進入輪班
+            </summary>
+            <param name="shift"></param>
+        </member>
+        <member name="M:Auth.Domain.Aggregates.User.AssignUserToPunchGroup(Auth.Domain.Aggregates.PunchGroup)">
+            <summary>
+            指定使用者進入打卡群組
+            </summary>
+            <param name="punchGroup"></param>
+        </member>
+        <member name="M:Auth.Domain.Aggregates.User.AssignUserAsSubordinateOf(Auth.Domain.Aggregates.User)">
+            <summary>
+            指定主管給使用者
+            </summary>
+            <param name="manager"></param>
+        </member>
+        <member name="M:Auth.Domain.Aggregates.User.RefreshSecurityParams(System.Int32)">
+            <summary>
+            更新 Token 所需要得參數, User 有任何改變都要來一遍
+            </summary>
+        </member>
+        <member name="M:Auth.Domain.Aggregates.User.Login(System.String,System.String)">
+            <summary>
+             登入
+            </summary>
+            <param name="deviceType"></param>
+            <param name="deviceToken"></param>
+        </member>
+        <member name="M:Auth.Domain.Aggregates.User.SetDeviceToken(System.String,System.String)">
+            <summary>
+            設置裝置令牌(每次請求的時候,會觸發一次)
+            </summary>
+            <param name="deviceType"></param>
+            <param name="deviceToken"></param>
+        </member>
+        <member name="M:Auth.Domain.Aggregates.User.Logout">
+            <summary>
+            登出
+            </summary>
+        </member>
+        <member name="F:Auth.Domain.Enums.Permission.admin">
+            <summary>
+            公司所有者
+            </summary>
+        </member>
+        <member name="F:Auth.Domain.Enums.Permission.backstage">
+            <summary>
+            後台權限
+            </summary>
+        </member>
+        <member name="F:Auth.Domain.Enums.Permission.manager">
+            <summary>
+            部門主管
+            </summary>
+        </member>
+        <member name="F:Auth.Domain.Enums.Permission.employee">
+            <summary>
+            僱員
+            </summary>
+        </member>
+        <member name="F:Auth.Domain.Enums.VerificationStatus.Success">
+            <summary>
+            驗證成功
+            </summary>
+        </member>
+        <member name="F:Auth.Domain.Enums.VerificationStatus.Fail">
+            <summary>
+            驗證失敗
+            </summary>
+        </member>
+        <member name="F:Auth.Domain.Enums.VerificationStatus.HaveNoChance">
+            <summary>
+            驗證失敗, 並且, 驗證太多次了, 沒有機會了
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Errors.Error.Code">
+            <summary>
+            自定義錯誤碼
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.Errors.Error.Message">
+            <summary>
+            錯誤訊息
+            </summary>
+        </member>
+        <member name="T:Auth.Domain.Errors.BadRequestException">
+            <summary>
+            General Error
+            </summary>
+        </member>
+        <member name="T:Auth.Domain.Errors.UnauthorizedException">
+            <summary>
+            使用者身份未被認證
+            </summary>
+        </member>
+        <member name="T:Auth.Domain.Errors.ForbiddenException">
+            <summary>
+            使用者權限不夠
+            </summary>
+        </member>
+        <member name="T:Auth.Domain.Errors.ConflictException">
+            <summary>
+            會使伺服器(會是資料)產生衝突
+            </summary>
+        </member>
+        <member name="T:Auth.Domain.Errors.UnprocessableEntityException">
+            <summary>
+            資料格式不對
+            </summary>
+        </member>
+        <member name="F:Auth.Domain.Errors.ErrorType.BadRequest">
+            <summary>
+            General Error
+            </summary>
+        </member>
+        <member name="F:Auth.Domain.Errors.ErrorType.Unauthorized">
+            <summary>
+            使用者身份未被認證
+            </summary>
+        </member>
+        <member name="F:Auth.Domain.Errors.ErrorType.Forbidden">
+            <summary>
+            使用者權限不夠
+            </summary>
+        </member>
+        <member name="F:Auth.Domain.Errors.ErrorType.Conflict">
+            <summary>
+            會使伺服器(會是資料)產生衝突
+            </summary>
+        </member>
+        <member name="F:Auth.Domain.Errors.ErrorType.UnprocessableEntity">
+            <summary>
+            資料格式不對
+            </summary>
+        </member>
+        <member name="T:Auth.Domain.Events.IDomainEvent">
+            <summary>
+            Marker Interface
+            </summary>
+        </member>
+        <member name="T:Auth.Domain.Events.RegistrationEvent">
+            <summary>
+            事件 - 註冊
+            </summary>
+            <param name="email"></param>
+            <param name="code"></param>
+        </member>
+        <member name="M:Auth.Domain.Events.RegistrationEvent.#ctor(System.String,System.Int32)">
+            <summary>
+            事件 - 註冊
+            </summary>
+            <param name="email"></param>
+            <param name="code"></param>
+        </member>
+        <member name="P:Auth.Domain.Events.RegistrationEvent.email">
+            <summary></summary>
+        </member>
+        <member name="P:Auth.Domain.Events.RegistrationEvent.code">
+            <summary></summary>
+        </member>
+        <member name="M:Auth.Domain.Factories.Interface.ICompanyFactory.Create(System.String,Auth.Domain.ValueObjects.Location,Auth.Domain.Aggregates.User)">
+            <summary>
+            建立公司
+            </summary>
+            <param name="name">公司的名稱</param>
+            <param name="location">公司的位置</param>
+            <param name="user">建立公司的使用者</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Domain.Factories.Interface.IDepartmentFactory.Create">
+            <summary>
+            建立預設部門
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Domain.Factories.Interface.IPunchGroupFactory.Create(Auth.Domain.ValueObjects.Location)">
+            <summary>
+            建立表準打卡群組
+            </summary>
+            <param name="location"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Auth.Domain.Factories.Interface.IRegistrationFactory">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Auth.Domain.Factories.Interface.IRegistrationFactory.Create(System.String)">
+            <summary>
+            使用者註冊後建立一比註冊資料
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Domain.Factories.Interface.IScheduleFactory.Create">
+            <summary>
+            建立標準工作表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Domain.Factories.Interface.IUserFactory.Create(System.String,System.String,Auth.Domain.ValueObjects.Password)">
+            <summary>
+            註冊新用戶
+            </summary>
+            <param name="name"></param>
+            <param name="email"></param>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Domain.Factories.Interface.IUserFactory.CreateAsync(System.String,System.String,System.String,System.DateOnly)">
+            <summary>
+            建立公司成員
+            </summary>
+            <param name="name"></param>
+            <param name="email"></param>
+            <param name="title"></param>
+            <param name="boardingTime"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Domain.Factories.RegistrationFactory.Create(System.String)">
+            <summary>
+            使用者註冊後建立一比註冊資料
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Auth.Domain.Policies.IPolicy`1">
+            <summary>
+            Policy Pattern
+            https://www.codeproject.com/Tips/1175911/Domain-Policy-for-Domain-Driven-Design
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Auth.Domain.Policies.IPolicy`1.IsApplicable(Auth.Domain.Policies.IPolicyData)">
+            <summary>
+            是否符合條件, 若符合條件 GenerateItems 給出的 items 都可以拿來運用
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Domain.Policies.IPolicy`1.GenerateItems(Auth.Domain.Policies.IPolicyData)">
+            <summary>
+            產生出符合條件得 Items
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Auth.Domain.Policies.IPolicyData">
+            <summary>
+            Marker Interface, 用來判斷是否符合條件用的參數
+            </summary>
+        </member>
+        <member name="M:Auth.Domain.Repositories.ICompanyRepository.GetAsync(System.Int64)">
+            <summary>
+            取得 - 公司
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Domain.Repositories.ICompanyRepository.AddAsync(Auth.Domain.Aggregates.Company)">
+            <summary>
+            新增 - 公司
+            </summary>
+            <param name="company"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Domain.Repositories.IRegistrationRepository.GetAsync(System.String)">
+            <summary>
+            取得 - 註冊資料 (Email 是註冊資量的 Identity)
+            </summary>
+            <param name="email"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Domain.Repositories.IRegistrationRepository.AddAsync(Auth.Domain.Aggregates.Registration)">
+            <summary>
+            建立 - 註冊資料
+            </summary>
+            <param name="registration"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Domain.Repositories.IRegistrationRepository.UpdateAsync(Auth.Domain.Aggregates.Registration)">
+            <summary>
+            更新 - 註冊資料
+            </summary>
+            <param name="registration"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Domain.Repositories.IRegistrationRepository.DeleteAsync(Auth.Domain.Aggregates.Registration)">
+            <summary>
+            刪除 - 註冊資料
+            </summary>
+            <param name="registration"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Domain.Repositories.IUserRepository.GetAsync(System.Int64)">
+            <summary>
+            取得使用者
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Domain.Repositories.IUserRepository.GetUserByEmailAsync(System.String)">
+            <summary>
+            透過郵箱取得使用者
+            </summary>
+            <param name="email"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Domain.Repositories.IUserRepository.AddAsync(Auth.Domain.Aggregates.User)">
+            <summary>
+            建立使用者
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Domain.Repositories.IUserRepository.UpdateAsync(Auth.Domain.Aggregates.User)">
+            <summary>
+            更新使用者
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Auth.Domain.ValueObjects.Password.HashPassword">
+            <summary>
+            密碼哈希
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.ValueObjects.Password.Salt">
+            <summary>
+            鹽
+            </summary>
+        </member>
+        <member name="M:Auth.Domain.ValueObjects.Password.op_Implicit(Auth.Domain.ValueObjects.Password)~System.ValueTuple{System.String,System.String}">
+            <summary>
+            dto -> tuple
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Auth.Domain.ValueObjects.Verification.Email">
+            <summary>
+            使用者郵箱
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.ValueObjects.Verification.Code">
+            <summary>
+            驗證碼
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.ValueObjects.Verification.Success">
+            <summary>
+            驗證通過
+            </summary>
+        </member>
+        <member name="P:Auth.Domain.ValueObjects.Verification.RemainTry">
+            <summary>
+            剩餘次數
+            </summary>
+        </member>
+        <member name="M:Auth.Domain.ValueObjects.Verification.#ctor">
+            <summary>
+            JsonSerializer 用
+            </summary>
+        </member>
+        <member name="M:Auth.Domain.ValueObjects.Verification.#ctor(System.String)">
+            <summary>
+            註冊
+            </summary>
+            <param name="email"></param>
+        </member>
+        <member name="M:Auth.Domain.ValueObjects.Verification.#ctor(Auth.Domain.ValueObjects.Verification)">
+            <summary>
+            驗證失敗
+            </summary>
+            <param name="verification"></param>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+    </members>
+</doc>
