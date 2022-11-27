@@ -16,7 +16,7 @@ public class RegistrationFactory : IRegistrationFactory
     }
 
     /// <summary>
-    /// 給 Repository 重建資料用的
+    /// 給 Repository 重建資料用的(這裡 Redis 寫的不是很漂亮)
     /// </summary>
     /// <param name="email"></param>
     /// <param name="remainTry"></param>
