@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth.Infrastructure", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth.Presentation", "src\Auth.Presentation\Auth.Presentation.csproj", "{F9FA48DF-BDA0-4CC6-99EB-AE4AEB1EE0A7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth.UnitTests", "src\Auth.UnitTests\Auth.UnitTests.csproj", "{2DDBB0F5-469C-467F-9457-30257AFF9A60}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,5 +42,9 @@ Global
 		{5B945471-E28C-4BCF-863C-7CC37E90F013}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B945471-E28C-4BCF-863C-7CC37E90F013}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B945471-E28C-4BCF-863C-7CC37E90F013}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DDBB0F5-469C-467F-9457-30257AFF9A60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DDBB0F5-469C-467F-9457-30257AFF9A60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DDBB0F5-469C-467F-9457-30257AFF9A60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DDBB0F5-469C-467F-9457-30257AFF9A60}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

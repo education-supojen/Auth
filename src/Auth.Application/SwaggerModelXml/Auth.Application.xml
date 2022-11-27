@@ -248,7 +248,7 @@
         </member>
         <member name="M:Auth.Application.Factories.Aggregates.RegistrationFactory.Reconstruct(System.String,System.Int32,System.Int32,System.Boolean,System.String)">
             <summary>
-            給 Repository 重建資料用的
+            給 Repository 重建資料用的(這裡 Redis 寫的不是很漂亮)
             </summary>
             <param name="email"></param>
             <param name="remainTry"></param>
