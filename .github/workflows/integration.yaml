@@ -49,3 +49,12 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
+    # description - compile the code
+    - name: Compile The Code
+      run: make compile
+    # description - show the image & tag
+    - name: Show Version
+      run: make print_version
+    # description - build docker image 
+    - name: Build Docker Image
+      run: make publish
