@@ -1,17 +1,17 @@
 name: Publish to DockerHub
 
 on:
-  workflow_dispatch:
   pull_request:
     branches:
     - develop
     types:
     - closed
-
+  workflow_dispatch:
+   
 jobs:
   # Job - build image and push it into DockerHub 
   publish:
-    if: github.event.pull_request.merged == 'true'
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
 
