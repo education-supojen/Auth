@@ -19,10 +19,6 @@ jobs:
       - name: Get Code
         uses: actions/checkout@v3
       
-      # description - show the version of the app
-      - name: Publish
-        run: make publish
-      
       # description - login to DockerHub      
       - name: Login To DockerHub
         uses: docker/login-action@v2
@@ -42,5 +38,5 @@ jobs:
         with:
           context: . 
           push: true
-          tags: make image 
+          tags: make version 
 
