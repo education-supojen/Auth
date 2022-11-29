@@ -1,0 +1,46 @@
+name: Publish to DockerHub
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+    - develop
+    types:
+    - closed
+
+jobs:
+  # Job - build image and push it into DockerHub 
+  publish:
+    if: github.event.pull_request.merged == 'true'
+    runs-on: ubuntu-latest
+    steps:
+
+      # description - get code
+      - name: Get Code
+        uses: actions/checkout@v3
+      
+      # description - show the version of the app
+      - name: Show Version
+        run: make version
+      
+      # description - login to DockerHub      
+      - name: Login To DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      
+      # description - Extract image's tag from DockerHub
+      - name: Extract metadata (tags, labels) for docker
+        uses: docker/metadata-action@v4
+        with:
+          images: supojen/education-auth
+
+      # description - Build and push docker image
+      - name: Build and push docker image
+        uses: docker/build-push-action@v3
+        with:
+          context: . 
+          push: true
+          tags: make image 
+
