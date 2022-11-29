@@ -5,10 +5,10 @@ compile:
 	dotnet publish src/Auth.Presentation/Auth.Presentation.csproj -r linux-x64 --self-contained false --configuration Release -o compile
 
 version: 
-	${version}
+	echo ${version}
 
 image:
-	${IMAGE_NAME}:${version}
+	echo ${IMAGE_NAME}:${version}
 
 publish:
 	docker build --rm -t ${IMAGE_NAME} . && docker push ${IMAGE_NAME}
