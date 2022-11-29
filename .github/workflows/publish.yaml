@@ -32,11 +32,17 @@ jobs:
         with:
           images: supojen/education-auth
 
+      # description - Get the version of the app
+      - name: Get the version of the app
+        id: version
+        run: make version
+
       # description - Build and push docker image
       - name: Build and push docker image
         uses: docker/build-push-action@v3
         with:
           context: . 
           push: true
-          tags: make version 
+          tags: ${{steps.version.outputs}}
+
 
