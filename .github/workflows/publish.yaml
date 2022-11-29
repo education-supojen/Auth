@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v3
       
       # description - show the version of the app
-      - name: Show Publish
+      - name: Publish
         run: make publish
       
       # description - login to DockerHub      
