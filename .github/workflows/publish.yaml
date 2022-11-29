@@ -21,7 +21,7 @@ jobs:
       
       # description - show the version of the app
       - name: Show Version
-        run: make 
+        run: make publish
       
       # description - login to DockerHub      
       - name: Login To DockerHub
