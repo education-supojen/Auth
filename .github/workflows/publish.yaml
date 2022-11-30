@@ -1,4 +1,4 @@
-name: Publish to DockerHub
+name: Publish
 
 on:
   pull_request:
@@ -7,8 +7,9 @@ on:
     types:
     - closed
   workflow_dispatch:
-   
+
 jobs:
+
   # Job - build image and push it into DockerHub 
   publish:
     if: github.event.pull_request.merged == true
@@ -18,6 +19,10 @@ jobs:
       # description - get code
       - name: Get Code
         uses: actions/checkout@v3
+
+      # description - show tag
+      - name: Show Tag
+        uses: ./.github/actions/tags
       
       # description - login to DockerHub      
       - name: Login To DockerHub
@@ -32,17 +37,12 @@ jobs:
         with:
           images: supojen/education-auth
 
-      # description - Get the version of the app
-      - name: Get the version of the app
-        id: version
-        run: make version
-
       # description - Build and push docker image
       - name: Build and push docker image
         uses: docker/build-push-action@v3
         with:
           context: . 
           push: true
-          tags: ${{steps.version.outputs}}
+          tags: 1.0.0
 
 
