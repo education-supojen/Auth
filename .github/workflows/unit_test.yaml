@@ -20,21 +20,35 @@ jobs:
     #     so your workflow can access it.
     - name: Get Code
       uses: actions/checkout@v3
-    # description - 
-    #     download dotnet 
+
+    # description - download dotnet 
     - name: Setup Dotnet
       uses: actions/setup-dotnet@v3
       with: 
         dotnet-version: '6.0.x'
-    # description -
-    #     Restore Dependencies 
+    
+    # description - restore Dependencies 
     - name: Restore Dependnecies
       run: dotnet restore
-    # description
-    #     Build Solution
+    
+    # description - build Solution
     - name: Build
       run: dotnet build --no-restore
-    # description -
-    #     Doing the unit test
+    
+    # description - doing the unit test
     - name: Test
-      run: dotnet test --no-build
+      run: dotnet test --no-build --logger "trx;LogFileName=test-results.trx"
+
+    # description - 
+    #     test report
+    #     reference: https://github.com/dorny/test-reporter
+    - name: Test Report
+      uses: dorny/test-reporter@v1
+      if: always()
+      with:
+        name: tests
+        path: "**/test-results.trx"
+        reporter: dotnet-trx
+        fail-on-error: true
+
+
