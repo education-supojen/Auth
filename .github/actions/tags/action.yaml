@@ -1,0 +1,8 @@
+name: 'tag'
+description: 'calculate the tag for the image we want to publish'
+runs:
+  using: 'composite'
+  steps:
+    - name: Show Run Number
+      shell: bash
+      run: echo ${{ github.run_id }}

@@ -1,39 +1,28 @@
-name: Publish to DockerHub
+name: Publish
 
 on:
   pull_request:
     branches:
     - develop
     types:
-    - opened
+    - closed
   workflow_dispatch:
-   
+
 jobs:
-
-  # Job - find the way for tagging the image 
-  tagging:
-    if: github.event.pull_request.merged == true
-    runs-on: ubuntu-latest
-    outputs:
-      tag: ${{ steps.version.outputs }}
-    steps:
-
-      # description - get the version of the applications
-      - name: Get the version of the application
-        id: version
-        run: version=${{version}} >> $GITHUB_OUTPUT
-
 
   # Job - build image and push it into DockerHub 
   publish:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-    needs: tagging
     steps:
 
       # description - get code
       - name: Get Code
         uses: actions/checkout@v3
+
+      # description - show tag
+      - name: Show Tag
+        uses: ./.github/actions/tags
       
       # description - login to DockerHub      
       - name: Login To DockerHub
@@ -54,6 +43,6 @@ jobs:
         with:
           context: . 
           push: true
-          tags: ${{steps.version.outputs}}
+          tags: 1.0.0
 
 
