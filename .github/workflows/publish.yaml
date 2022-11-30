@@ -5,14 +5,30 @@ on:
     branches:
     - develop
     types:
-    - closed
+    - opened
   workflow_dispatch:
    
 jobs:
+
+  # Job - find the way for tagging the image 
+  tagging:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.version.outputs }}
+    steps:
+
+      # description - get the version of the applications
+      - name: Get the version of the application
+        id: version
+        run: version=${{version}} >> $GITHUB_OUTPUT
+
+
   # Job - build image and push it into DockerHub 
   publish:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
+    needs: tagging
     steps:
 
       # description - get code
@@ -31,11 +47,6 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: supojen/education-auth
-
-      # description - Get the version of the app
-      - name: Get the version of the app
-        id: version
-        run: make version
 
       # description - Build and push docker image
       - name: Build and push docker image
