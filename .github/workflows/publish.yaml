@@ -27,8 +27,9 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       
-      # description - Extract image's tag from DockerHub
-      - name: Extract metadata (tags, labels) for docker
+      # description - Docker meta
+      - name: Docker meta
+        id: meta
         uses: docker/metadata-action@v4
         with:
           images: docker.io/${{github.repository}}
