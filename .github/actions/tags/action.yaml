@@ -11,12 +11,20 @@ outputs:
 runs:
   using: 'composite'
   steps:
+
     - name: Show Run ID
       shell: bash
       run: echo ${{ github.run_id }}
+  
     - name: Show version
       shell: bash
       run: make version
+  
+    - name: Set Tag
+      id: set
+      shell: bash
+      run: echo "tag=$(printf())"
+  
     - name: Test input
       id: test
       if: inputs.official == 'false'
