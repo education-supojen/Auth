@@ -19,11 +19,6 @@ jobs:
       # description - get code
       - name: Get Code
         uses: actions/checkout@v3
-
-      # description - show tag
-      - name: Show Tag
-        id: tag
-        uses: ./.github/actions/tags
       
       # description - login to DockerHub      
       - name: Login To DockerHub
@@ -36,7 +31,10 @@ jobs:
       - name: Extract metadata (tags, labels) for docker
         uses: docker/metadata-action@v4
         with:
-          images: supojen/education-auth
+          images: docker.io/${{github.repository}}
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
 
       # description - build the application
       - name: Build application
@@ -48,6 +46,6 @@ jobs:
         with:
           context: . 
           push: true
-          tags: ${{steps.tag.outputs.tag}}
+          tags: ${{ steps.meta.outputs.tags }}
 
 
