@@ -1,8 +1,26 @@
 name: 'tag'
 description: 'calculate the tag for the image we want to publish'
+inputs:
+  official:
+    description: 'Whether this tag is for official version or not.'
+    default: 'false'
+outputs:
+  tag:
+    description: 'The tag image should have'
+    value: ${{ steps.test.outputs.cache }}
 runs:
   using: 'composite'
   steps:
-    - name: Show Run Number
+    - name: Show Run ID
       shell: bash
       run: echo ${{ github.run_id }}
+    - name: Show version
+      shell: bash
+      run: make version
+    - name: Test input
+      id: test
+      if: inputs.official == 'false'
+      shell: bash
+      run: |
+        echo 'not official'
+        echo "cache='${{ github.run_id }}'" >> $GITHUB_OUTPUT

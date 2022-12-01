@@ -22,6 +22,7 @@ jobs:
 
       # description - show tag
       - name: Show Tag
+        id: tag
         uses: ./.github/actions/tags
       
       # description - login to DockerHub      
@@ -37,12 +38,16 @@ jobs:
         with:
           images: supojen/education-auth
 
+      # description - build the application
+      - name: Build application
+        run: make compile
+
       # description - Build and push docker image
       - name: Build and push docker image
         uses: docker/build-push-action@v3
         with:
           context: . 
           push: true
-          tags: 1.0.0
+          tags: ${{steps.tag.outputs.tag}}
 
 
