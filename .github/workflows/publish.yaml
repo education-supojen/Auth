@@ -32,10 +32,12 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: docker.io/${{github.repository}}
+          flavor: latest=true
           tags: |
             type=ref,event=branch
             type=ref,event=pr
             type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
 
       # description - build the application
       - name: Build application
