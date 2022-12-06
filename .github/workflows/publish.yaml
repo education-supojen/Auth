@@ -14,6 +14,8 @@ jobs:
   publish:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
+    env: 
+      version: $(make version)
     steps:
 
       # description - get code
@@ -37,10 +39,10 @@ jobs:
             type=sha,prefix=,format=short
 
       # description - 取得版本號
-      - name: Get Version Number
-        run: |   
-          make version
-          echo "version=${VERSION}" >> $GITHUB_ENV
+      #- name: Get Version Number
+      #  run: |   
+      #    make version
+      #    echo "version=${VERSION}" >> $GITHUB_ENV
       
       # description - 測試版本號是否有成功被設定
       - name:  Test version variable
