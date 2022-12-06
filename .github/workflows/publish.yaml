@@ -14,6 +14,8 @@ jobs:
   publish:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
+    env:
+      VERSION: "1.0.0"
     steps:
 
       # description - get code
@@ -35,7 +37,17 @@ jobs:
           images: supojen/education-auth
           tags: |
             type=sha,prefix=,format=short
-            type=schedule,pattern={{date 'YYYYMMDD'}}
+
+      # description - 取得版本號
+      - name: Get Version Number
+        run: | 
+          echo "version=$(make version)" >> $GITHUB_ENV
+      
+      # description - 測試版本號是否有成功被設定
+      - name:  Test version variable
+        run: echo "Hello ${env.version}"
+
+
       # description - build the application
       - name: Build application
         run: make compile
