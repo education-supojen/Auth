@@ -36,7 +36,7 @@ jobs:
         with:
           images: supojen/education-auth
           tags: |
-            type=sha,prefix=,format=short
+            type=sha,prefix=${env.version},format=short
 
       # description - 取得版本號
       #- name: Get Version Number
@@ -46,8 +46,7 @@ jobs:
       
       # description - 測試版本號是否有成功被設定
       - name:  Test version variable
-        run: echo "Hello ${env.version}"
-
+        run: env
 
       # description - build the application
       - name: Build application
