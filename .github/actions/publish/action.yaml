@@ -7,6 +7,6 @@ runs:
     - name: Publish dotnet application (if need it)
       shell: bash
       run: |
-        if [!-d "./compile"]; then
-          make compile          
+        if [!-d "./compile"]; then 
+          make compile            
         fi
