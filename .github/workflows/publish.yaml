@@ -42,11 +42,11 @@ jobs:
             type=sha,prefix=${{env.NOW}},format=short
       
       # description - build the application
-      - name: Publish dotnet application (if need it)
-        run: |
-          if [!-d "./compile"]; then \
-            make compile \
-          fi
+      #- name: Publish dotnet application (if need it)
+      #  run: |
+      #    if [!-d "./compile"]; then \
+      #      make compile \
+      #    fi
 
       # description - Build and push docker image
       - name: Build and push docker image
