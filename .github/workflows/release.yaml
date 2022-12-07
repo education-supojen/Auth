@@ -1,18 +1,16 @@
-name: Publish
+name: Release
+
 
 on:
-  pull_request:
+  push:
     branches:
-    - develop
-    types:
-    - closed
-  workflow_dispatch:
-
+      - 'develop'
+    tags:
+      - 'v*'
+      
 jobs:
 
-  # Job - build image and push it into DockerHub 
-  publish:
-    if: github.event.pull_request.merged == true
+  release:
     runs-on: ubuntu-latest
     steps:
 
@@ -35,7 +33,6 @@ jobs:
           images: supojen/education-auth
           tags: |
             type=semver,pattern={{raw}}
-            type=sha,prefix=,format=short
       
       # description - build the application
       - name: Build application
@@ -49,5 +46,19 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
 
-
+      # description - 
+      #     Create Pull Request (develop to main)
+      #     https://github.com/marketplace/actions/create-pull-request
+      - name: Create Pull Request (develop to main)
+        uses: peter-evans/create-pull-request@v4
+        with:
+          branch: main
+          delete-branch: false
+          title: 'release - ${{ github.ref_name }}'
+          body:
+            New Release
+          team-reviewers: |
+            owners
+            maintainers
+          milestone: 1
 
