@@ -39,7 +39,7 @@ jobs:
           images: supojen/education-auth
           tags: |
             type=semver,pattern={{raw}}
-            type=sha,prefix=${{env.NOW}},format=short
+            type=sha,prefix=dev,format=short
       
       # description - build the application
       - name: Publish dotnet application (if need it)
@@ -52,7 +52,7 @@ jobs:
           files: compile
 
       - name: File exists
-        if: steps.check_files.outputs.files_exists == 'true'
+        if: steps.check_directory.outputs.files_exists == 'true'
         run: echo "Directory Exsits"
 
 
