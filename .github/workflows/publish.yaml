@@ -36,6 +36,12 @@ jobs:
         with: 
           format: YYYYMMDD-HH
           utc: "+08:00"
+        
+      - name: Get version number
+        run: echo "VERSION=$(make version)" >> $GITHUB_ENV
+
+      - name: Cjeck version number
+        run: echo $VERSION
       
       # description - Docker meta
       - name: Docker meta
