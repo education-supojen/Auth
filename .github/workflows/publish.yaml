@@ -1,6 +1,9 @@
 name: Publish
 
 on:
+  push:
+    tags:
+      - "v*"
   pull_request:
     branches:
     - develop
@@ -36,6 +39,7 @@ jobs:
         with:
           images: supojen/education-auth
           tags: |
+            type=semver,pattern={{raw}}
             type=sha,prefix=,format=short
 
       # description - 取得版本號
