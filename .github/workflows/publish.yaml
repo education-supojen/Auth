@@ -47,7 +47,7 @@ jobs:
           images: supojen/education-auth
           tags: |
             type=semver,pattern={{raw}}
-            type=sha,prefix=${env.version},format=short
+            type=sha,prefix=${{env.version}},format=short
       
       # description - build the application
       - name: Build application
