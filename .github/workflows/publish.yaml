@@ -42,11 +42,19 @@ jobs:
             type=sha,prefix=${{env.NOW}},format=short
       
       # description - build the application
-      #- name: Publish dotnet application (if need it)
-      #  run: |
-      #    if [!-d "./compile"]; then \
-      #      make compile \
-      #    fi
+      - name: Publish dotnet application (if need it)
+        run: . ./pulish.sh
+
+      - name: Check if compile directory exists
+        id: check_directory
+        uses: andstor/file-existence-action@v2
+        with: 
+          files: compile
+
+      - name: File exists
+        if: steps.check_files.outputs.files_exists == 'true'
+        run: echo "Directory Exsits"
+
 
       # description - Build and push docker image
       - name: Build and push docker image
