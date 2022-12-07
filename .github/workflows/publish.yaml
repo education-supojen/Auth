@@ -33,11 +33,11 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       
       # description - 取得版本號
-      - name: Get Version Number
-        run: |   
-          make version
-          echo ${VERSION}
-          echo "VERSION=${VERSION}" >> $GITHUB_ENV
+      #- name: Get Version Number
+      #  run: |   
+      #    make version
+      #    echo ${VERSION}
+      #    echo "VERSION=${VERSION}" >> $GITHUB_ENV
 
       # description - Docker meta
       - name: Docker meta
