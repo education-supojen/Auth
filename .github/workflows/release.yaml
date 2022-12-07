@@ -49,16 +49,16 @@ jobs:
       # description - 
       #     Create Pull Request (develop to main)
       #     https://github.com/marketplace/actions/create-pull-request
-      - name: Create Pull Request (develop to main)
-        uses: peter-evans/create-pull-request@v4
-        with:
-          branch: main
-          delete-branch: false
-          title: 'release - ${{ github.ref_name }}'
-          body:
-            New Release
-          team-reviewers: |
-            owners
-            maintainers
-          milestone: 1
+      #- name: Create Pull Request (develop to main)
+      #  uses: peter-evans/create-pull-request@v4
+      #  with:
+      #    branch: main
+      #    delete-branch: false
+      #    title: 'release - ${{ github.ref_name }}'
+      #    body:
+      #      New Release
+      #    team-reviewers: |
+      #      owners
+      #      maintainers
+      #    milestone: 1
 
