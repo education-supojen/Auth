@@ -1,4 +1,4 @@
-VERSION:=1.2.0
+VERSION:=V1.0.0
 IMAGE_NAME:=supojen/education-auth:${version}
 
 compile:
@@ -12,3 +12,7 @@ image:
 
 publish:
 	docker build --rm -t ${IMAGE_NAME} . && docker push ${IMAGE_NAME}
+
+release:
+	git tag ${VERSION}
+	git push origin ${VERSION}
