@@ -3,11 +3,12 @@ name: unit test
 # Trigger - 
 #     Pull Request 被建立在 develop 分支時
 on: 
-  pull_request:
-    branches:
-    - develop
-    types: 
-    - opened
+  #pull_request:
+  #  branches:
+  #  - develop
+  #  types: 
+  #  - opened
+  workflow_dispatch:
 
 jobs:
 
