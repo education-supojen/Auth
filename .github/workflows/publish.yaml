@@ -27,6 +27,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      # description - Set current date as env variable
       - name: Set current date as env variable
         run: echo "NOW=$(date + '%Y-%m-%d_%H-%M')" >> $GITHUB_ENV
       
@@ -41,8 +42,11 @@ jobs:
             type=sha,prefix=,format=short
       
       # description - build the application
-      - name: Build application
-        uses: ./.github/actions/publish
+      - name: Publish dotnet application (if need it)
+        run: | 
+          if[!-d "./compile"]; then
+            make publish
+          fi
 
       # description - Build and push docker image
       - name: Build and push docker image
