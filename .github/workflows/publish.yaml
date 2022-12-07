@@ -43,7 +43,7 @@ jobs:
       
       # description - build the application
       - name: Publish dotnet application (if need it)
-        run: . ./pulish.sh
+        run: . ./publish.sh
 
       - name: Check if compile directory exists
         id: check_directory
