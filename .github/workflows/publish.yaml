@@ -27,9 +27,15 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # description - Set current date as env variable
-      - name: Set current date as env variable
-        run: echo "NOW=$(date + '%Y-%m-%d_%H-%M')" >> $GITHUB_ENV
+      # description - 
+      #     Get current time
+      #     https://github.com/marketplace/actions/get-current-time
+      - name: Get current time
+        uses: josStorer/get-current-time@v2.0.2
+        id: current-time
+        with: 
+          format: YYYYMMDD-HH
+          utc: "+08:00"
       
       # description - Docker meta
       - name: Docker meta
@@ -39,7 +45,7 @@ jobs:
           images: supojen/education-auth
           tags: |
             type=semver,pattern={{raw}}
-            type=sha,prefix=dev,format=short
+            type=sha,prefix=${{ steps.current-time.outputs.formattedTime }},format=short
       
       # description - build the application
       - name: Publish dotnet application (if need it)
