@@ -5,7 +5,7 @@ runs:
   steps:
 
     - name: Publish dotnet application (if need it)
-      shell: shell
+      shell: bash
       run: |
         if [!-d "./compile"]; then
           make compile          
