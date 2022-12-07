@@ -1,0 +1,1193 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Auth.Infrastructure</name>
+    </assembly>
+    <members>
+        <member name="M:Auth.Infrastructure.Authentication.AesService.AesEncryptKey">
+            <summary>
+            產生一組 (密鑰, Initial vector) 做 AES-CBC 文本加密用的
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Authentication.AesService.EncryptCBC(System.String)">
+            <summary>
+            AES-CBC 文本加密
+            </summary>
+            <param name="text"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Authentication.AesService.EncryptECB(System.String)">
+            <summary>
+            AES-EBC 文本加密 (不需要 Initial Vector 但相對不安全)
+            </summary>
+            <param name="text"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Authentication.AesService.DecryptCBC(System.String)">
+            <summary>
+            AES-CBC 文本解密 
+            </summary>
+            <param name="text"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Authentication.AesService.DecryptECB(System.String)">
+            <summary>
+            AES-EBC 文本解密 (不需要 Initial Vector 但相對不安全)
+            </summary>
+            <param name="text"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Authentication.AesService.RandomBytes(System.Int32)">
+            <summary>
+            產生一組 binary 亂數
+            </summary>
+            <param name="length"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Authentication.AesService.EncodedRandomString(System.Int32)">
+            <summary>
+            產生一組 base64 string 亂數
+            </summary>
+            <param name="length"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Authentication.AesService.CreateCbcCipher(System.String)">
+            <summary>
+            產生加密物件(cipher) : AES-CBC - 這種方式,會有 Initial Vector, 每次加密結果可能不一樣, 但比較安全, 竟量用這個
+            </summary>
+            <param name="keyBase64"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Authentication.AesService.CreateEcbCipher(System.String)">
+            <summary>
+            產生加密物件(cipher) : AES-ECB - 這種方式,不會有 Initial Vector, 每次加密結果一樣, 但比較不安全, 非必要別用
+            </summary>
+            <param name="keyBase64"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Auth.Infrastructure.Authentication.AesSettings.Key">
+            <summary>
+            Secret Key
+            </summary>
+        </member>
+        <member name="P:Auth.Infrastructure.Authentication.AesSettings.IV">
+            <summary>
+            Initial Vector
+            </summary>
+        </member>
+        <member name="M:Auth.Infrastructure.Authentication.JwtTokenGenerator.GenerateToken(System.Int64,System.String)">
+            <summary>
+            生產 Jwt Token
+            </summary>
+            <param name="userId"></param>
+            <param name="securitystamp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Authentication.JwtTokenGenerator.GenerateToken(System.String,System.String)">
+            <summary>
+            生產 Jwt Token
+            </summary>
+            <param name="sub"></param>
+            <param name="jti"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Authentication.JwtTokenGenerator.ReadSubAndJti(System.String)">
+            <summary>
+            解讀 Access Token Claim 內容
+            (對 jwt token 做基本驗證)
+            </summary>
+            <param name="stream">Jwt Token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Authentication.JwtTokenGenerator.HashBy256(System.String,System.String)">
+            <summary>
+            HmacSha256 Hash
+            </summary>
+            <param name="secret"></param>
+            <param name="text"></param>
+            <returns></returns>
+        </member>
+        <member name="F:Auth.Infrastructure.Authentication.PasswordHashService.Iteration">
+            <summary>
+            PBKDF 迭代次數(預設值爲 99999 次)
+            </summary>
+        </member>
+        <member name="F:Auth.Infrastructure.Authentication.PasswordHashService.Prf">
+            <summary>
+            哈希函數的選定 (預設是HMACSHA256)
+            </summary>
+        </member>
+        <member name="M:Auth.Infrastructure.Authentication.PasswordHashService.Pbkdf2(System.String)">
+            <summary>
+            使用者密碼 Pbkdf2 哈希
+            </summary>
+            <param name="password"></param>
+            <returns>
+                (byte[] salt, string saltStr, byte[] hashed, string hashedStr)
+                (鹽byte形式,鹽base64形式,密碼byte形式,密碼base64形式)
+            </returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Authentication.PasswordHashService.PasswordValidation(System.String,System.String,System.String)">
+            <summary>
+            檢查密碼是否合法(使用者輸入的密碼是否正確)
+            </summary>
+            <param name="password"></param>
+            <param name="hashPassword"></param>
+            <param name="salt"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Authentication.RefreshTokenGenerator.GenerateRefreshToken(Auth.Domain.Aggregates.User)">
+            <summary>
+            計算 refresh Token
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Authentication.RefreshTokenGenerator.GenerateRefreshToken(Auth.Domain.Aggregates.Staff)">
+            <summary>
+            計算 refresh Token
+            </summary>
+            <param name="staff"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Auth.Infrastructure.Persistence.Dapper.MiniORMDatabase.Connection">
+            <summary>
+            Database 連線
+            </summary>
+        </member>
+        <member name="P:Auth.Infrastructure.Persistence.Dapper.MiniORMDatabase.Transaction">
+            <summary>
+            Transaction
+            </summary>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Dapper.MiniORMDatabase.QueryAsync``1(System.String)">
+            <summary>
+            搜尋多筆
+            </summary>
+            <param name="sql"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Dapper.MiniORMDatabase.FindAsync``1(System.String)">
+            <summary>
+            搜尋一比
+            </summary>
+            <param name="sql"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Dapper.MiniORMDatabase.ExecuteAsync(System.String)">
+            <summary>
+            執行運算
+            </summary>
+            <param name="sql"></param>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Dapper.MiniORMDatabase.BeginTransaction">
+            <summary>
+            Begin Transaction
+            </summary>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Dapper.MiniORMDatabase.BeginTransactionAsync">
+            <summary>
+            Begin Transaction (Async)
+            </summary>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Dapper.MiniORMDatabase.Commit">
+            <summary>
+            Commit Transaction
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Dapper.MiniORMDatabase.CommitAsync">
+            <summary>
+            Commit Transaction (Async)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Auth.Infrastructure.Persistence.Dapper.InjectMiniORMMapping">
+            <summary>
+            Inject Mapping
+            </summary>
+        </member>
+        <member name="T:Auth.Infrastructure.Persistence.Dapper.MiniORMMappingBase`1">
+            <summary>
+            Mapping Base Class
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:Auth.Infrastructure.Persistence.Dapper.MiniORMMappingBase`1.columnMaps">
+            <summary>
+            什麼 property 要 mapping 到哪個 column
+            </summary>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Dapper.MiniORMMappingBase`1.Mapping">
+            <summary>
+            進行 Mapping
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:Auth.Infrastructure.Persistence.Dapper.UserInformationDtoMapping">
+            <summary>
+            UserInformationDto 的 Mapper
+            </summary>
+        </member>
+        <member name="F:Auth.Infrastructure.Persistence.Redis.AggregateCache._redisConn">
+            <summary>
+            ConnectionMultiplexer
+            </summary>
+        </member>
+        <member name="F:Auth.Infrastructure.Persistence.Redis.AggregateCache._aggregates">
+            <summary>
+            Aggregates
+            </summary>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Redis.AggregateCache.#ctor(StackExchange.Redis.ConnectionMultiplexer)">
+            <summary>
+            RedisCache
+            </summary>
+            <param name="redisConn"></param>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Redis.AggregateCache.GetAggregates">
+            <summary>
+            取得 Aggregate 裏面所有的 Domain Event
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Redis.AggregateCache.SaveAsync``1(System.String,``0,System.Func{``0,StackExchange.Redis.HashEntry[]},System.Int32)">
+            <summary>
+            Redis Hash Set 存處 Aggregate
+            </summary>
+            <param name="key"></param>
+            <param name="obj"></param>
+            <param name="func"></param>
+            <param name="expireSeconds"></param>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Redis.AggregateCache.GetHashCacheAsync``1(System.String)">
+            <summary>
+            取得 Hash雜湊物件
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">Redis Hash Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Redis.AggregateCache.DeleteAsync``1(System.String,``0)">
+            <summary>
+            刪除資料
+            </summary>
+            <param name="key"></param>
+            <param name="obj"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Redis.CacheAggregateRepoBase`1.HashEntriesToObject(StackExchange.Redis.HashEntry[])">
+            <summary>
+            把 HashEntry[] 轉成 Aggregate
+            </summary>
+            <param name="entries"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Redis.CacheAggregateRepoBase`1.GetHashEntries(`0)">
+            <summary>
+            把 Aggregate 轉成 HashEntry[]
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Redis.IAggregateCache.GetAggregates">
+            <summary>
+            取得 Aggregate 裏面所有的 Domain Event
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Redis.IAggregateCache.SaveAsync``1(System.String,``0,System.Func{``0,StackExchange.Redis.HashEntry[]},System.Int32)">
+            <summary>
+            Redis Hash Set 存處 Aggregate
+            </summary>
+            <param name="key"></param>
+            <param name="obj"></param>
+            <param name="func"></param>
+            <param name="expireSeconds"></param>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Redis.IAggregateCache.GetHashCacheAsync``1(System.String)">
+            <summary>
+            取得 Hash雜湊物件
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">Redis Hash Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Redis.IAggregateCache.DeleteAsync``1(System.String,``0)">
+            <summary>
+            刪除資料
+            </summary>
+            <param name="key"></param>
+            <param name="obj"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Repositories.PasswordUpdateRepository.AddAsync(Auth.Domain.Aggregates.PasswordUpdate)">
+            <summary>
+            新增
+            </summary>
+            <param name="passwordUpdate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Repositories.PasswordUpdateRepository.UpdateAsync(Auth.Domain.Aggregates.PasswordUpdate)">
+            <summary>
+            更新
+            </summary>
+            <param name="passwordUpdate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Repositories.PasswordUpdateRepository.GetAsync(System.String)">
+            <summary>
+            取得
+            </summary>
+            <param name="email"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Repositories.PasswordUpdateRepository.DeleteAsync(Auth.Domain.Aggregates.PasswordUpdate)">
+            <summary>
+            刪除
+            </summary>
+            <param name="passwordUpdate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Repositories.RegistrationRepository.HashEntriesToObject(StackExchange.Redis.HashEntry[])">
+            <summary>
+            把 HashEntry[] 轉成 Aggregate
+            </summary>
+            <param name="entries"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Repositories.RegistrationRepository.GetHashEntries(Auth.Domain.Aggregates.Registration)">
+            <summary>
+            把 Aggregate 轉成 HashEntry[]
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Repositories.RegistrationRepository.GetAsync(System.String)">
+            <summary>
+            取得 - 註冊資料 (Email 是註冊資量的 Identity)
+            </summary>
+            <param name="email"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Repositories.RegistrationRepository.AddAsync(Auth.Domain.Aggregates.Registration)">
+            <summary>
+            建立 - 註冊資料
+            </summary>
+            <param name="registration"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Repositories.RegistrationRepository.UpdateAsync(Auth.Domain.Aggregates.Registration)">
+            <summary>
+            更新 - 註冊資料
+            </summary>
+            <param name="registration"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Repositories.RegistrationRepository.DeleteAsync(Auth.Domain.Aggregates.Registration)">
+            <summary>
+            刪除 - 註冊資料
+            </summary>
+            <param name="registration"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Repositories.StaffRepository.Add(Auth.Domain.Aggregates.Staff)">
+            <summary>
+            註冊最後一步, 新增使用者
+            </summary>
+            <param name="staff"></param>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Repositories.StaffRepository.Update(Auth.Domain.Aggregates.Staff)">
+            <summary>
+            更新使用者
+            </summary>
+            <param name="staff"></param>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Repositories.StaffRepository.GetAsync(System.Int64)">
+            <summary>
+            取得使用者
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Repositories.StaffRepository.GetStaffByEmailAsync(System.String)">
+            <summary>
+            使用 Email 找到以註冊的使用者
+            </summary>
+            <param name="email"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Repositories.StaffRepository.CacheAddAsync(Auth.Domain.Aggregates.Staff)">
+            <summary>
+            處存到快取
+            </summary>
+            <param name="staff"></param>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Repositories.StaffRepository.CacheGetAsync(System.Int64)">
+            <summary>
+            取得
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Repositories.StaffRepository.CacheDeleteAsync(Auth.Domain.Aggregates.Staff)">
+            <summary>
+            刪除快取
+            </summary>
+            <param name="staff"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Repositories.StaffRepository.HashEntriesToObject(StackExchange.Redis.HashEntry[])">
+            <summary>
+            Hash Set Fields 轉成此用者模型
+            </summary>
+            <param name="entries"></param>
+            <returns></returns>
+            <exception cref="T:Auth.Domain.Errors.Failure"></exception>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Repositories.StaffRepository.GetHashEntries(Auth.Domain.Aggregates.Staff)">
+            <summary>
+            使用者模型轉成 HashSet Fields
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Auth.Infrastructure.Persistence.Repositories.UnitOfWork.UserRepository">
+            <summary>
+            使用者 - Repository
+            </summary>
+        </member>
+        <member name="P:Auth.Infrastructure.Persistence.Repositories.UnitOfWork.StaffRepository">
+            <summary>
+            後台人員 - Repository
+            </summary>
+        </member>
+        <member name="P:Auth.Infrastructure.Persistence.Repositories.UnitOfWork.RegistrationRepository">
+            <summary>
+            註冊 - Repo
+            </summary>
+        </member>
+        <member name="P:Auth.Infrastructure.Persistence.Repositories.UnitOfWork.PasswordUpdateRepository">
+            <summary>
+            更新密碼 - Repo
+            </summary>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Repositories.UnitOfWork.DispatchDomainEventAsync">
+            <summary>
+            取得所有 Domain Events 並且交給指定的 Handler 去做處理
+            </summary>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Repositories.UnitOfWork.BeginTransactionAsync">
+            <summary>
+            Begin Transaction (Async)
+            </summary>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Repositories.UnitOfWork.SaveAggregatesAsync">
+            <summary>
+            處理 Domain Events 並且建立 Savepoint
+            </summary>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Repositories.UnitOfWork.CommitAsync">
+            <summary>
+            Commit Transaction (Async)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Repositories.UserRepository.Add(Auth.Domain.Aggregates.User)">
+            <summary>
+            註冊最後一步, 新增使用者
+            </summary>
+            <param name="user"></param>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Repositories.UserRepository.Update(Auth.Domain.Aggregates.User)">
+            <summary>
+            更新使用者
+            </summary>
+            <param name="user"></param>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Repositories.UserRepository.GetAsync(System.Int64)">
+            <summary>
+            取得使用者
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Repositories.UserRepository.GetUserByEmailAsync(System.String)">
+            <summary>
+            使用 Email 找到以註冊的使用者
+            </summary>
+            <param name="email"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Repositories.UserRepository.CacheAddAsync(Auth.Domain.Aggregates.User)">
+            <summary>
+            處存到快取
+            </summary>
+            <param name="user"></param>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Repositories.UserRepository.CacheGetAsync(System.Int64)">
+            <summary>
+            取得
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Repositories.UserRepository.CacheDeleteAsync(Auth.Domain.Aggregates.User)">
+            <summary>
+            刪除快取
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Repositories.UserRepository.HashEntriesToObject(StackExchange.Redis.HashEntry[])">
+            <summary>
+            Hash Set Fields 轉成此用者模型
+            </summary>
+            <param name="entries"></param>
+            <returns></returns>
+            <exception cref="T:Auth.Domain.Errors.Failure"></exception>
+        </member>
+        <member name="M:Auth.Infrastructure.Persistence.Repositories.UserRepository.GetHashEntries(Auth.Domain.Aggregates.User)">
+            <summary>
+            使用者模型轉成 HashSet Fields
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.ICache.GetObject``1(System.String)">
+            <summary>
+            取得Cache內容
+            </summary>
+            <typeparam name="T">轉換的物件</typeparam>
+            <param name="key">Redis Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.ICache.GetObjectAsync``1(System.String)">
+            <summary>
+            取得Cache內容
+            </summary>
+            <typeparam name="T">轉換的物件</typeparam>
+            <param name="key">Redis Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.ICache.RemoveCache(System.String)">
+            <summary>
+            刪除資料
+            </summary>
+            <param name="key">Redis Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.ICache.RemoveCacheAsync(System.String)">
+            <summary>
+            刪除資料
+            </summary>
+            <param name="key">Redis Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.ICache.SetCache``1(System.String,``0,System.TimeSpan)">
+            <summary>
+            寫入Cache 有時效性
+            </summary>
+            <typeparam name="T">轉換的物件</typeparam>
+            <param name="key">Redis Key</param>
+            <param name="obj">轉換的物件</param>
+            <param name="expiry">多久過期</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.ICache.SetCacheAsync``1(System.String,``0,System.TimeSpan)">
+            <summary>
+            寫入Cache 有時效性
+            </summary>
+            <typeparam name="T">轉換的物件</typeparam>
+            <param name="key">Redis Key</param>
+            <param name="obj">轉換的物件</param>
+            <param name="expiry">多久過期</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.ICache.SetExpiredKey(System.String,System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            寫入Cache 有時效性
+            </summary>
+            <param name="hashKey">Redis Key</param>
+            <param name="hour">小時</param>
+            <param name="minute">分</param>
+            <param name="second">秒</param>
+            <param name="json">Json資料</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.ICache.IsKeyExist(System.String)">
+            <summary>
+            鍵值是否存在
+            </summary>
+            <param name="hashKey">Redis Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.ICacheLinkList.LPushList(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            LPUSH List 加入列表內
+            </summary>
+            <param name="key">Redis Key</param>
+            <param name="objs">要加入之列表</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.ICacheLinkList.LPushListAsync(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            LPUSH Async List 加入列表內
+            </summary>
+            <param name="key">Redis Key</param>
+            <param name="objs">要加入之列表</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.ICacheLinkList.LPush(System.String,System.String)">
+            <summary>
+            LPUSH String 加入列表內
+            </summary>
+            <param name="key">Redis Key</param>
+            <param name="str">要推送一筆的內容</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.ICacheLinkList.LPushAsync(System.String,System.String)">
+            <summary>
+            LPUSH Async String 加入列表內
+            </summary>
+            <param name="key">Redis Key</param>
+            <param name="str">要推送一筆的內容</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.ICacheLinkList.LPop(System.String)">
+            <summary>
+            LPOP String 取出一筆
+            </summary>
+            <param name="key">Redis Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.ICacheLinkList.LPopAsync(System.String)">
+            <summary>
+            LPOP Async String 取出一筆
+            </summary>
+            <param name="key">Redis Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.ICacheLinkList.LLengthAsync(System.String)">
+            <summary>
+            LRange Length 取得長度
+            </summary>
+            <param name="key">Redis Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.ICacheLinkList.LLength(System.String)">
+            <summary>
+            LRange Length 取得長度
+            </summary>
+            <param name="key">Redis Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.ICacheLinkList.SetKeyExpiredAsync(System.String,System.Nullable{System.DateTime})">
+            <summary>
+            設定Redis資料過期時間
+            </summary>
+            <param name="key">Redis Key</param>
+            <param name="expiredTime">過期時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.ICacheLinkList.SetKeyExpiredAsync(System.String,System.Nullable{System.TimeSpan})">
+            <summary>
+            設定Redis資料過期時間
+            </summary>
+            <param name="key">Redis Key</param>
+            <param name="expiredTime">過期時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.ICacheLinkList.SetKeyExpired(System.String,System.Nullable{System.DateTime})">
+            <summary>
+            設定Redis資料過期時間
+            </summary>
+            <param name="key">Redis Key</param>
+            <param name="expiredTime">過期時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.ICacheLinkList.SetKeyExpired(System.String,System.Nullable{System.TimeSpan})">
+            <summary>
+            設定Redis資料過期時間
+            </summary>
+            <param name="key">Redis Key</param>
+            <param name="expiredTime">過期時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.ICacheLinkList.RemoveCacheAsync(System.String)">
+            <summary>
+            移除快取
+            </summary>
+            <param name="key">Redis Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.ICacheLinkList.RemoveCache(System.String)">
+            <summary>
+            移除快取
+            </summary>
+            <param name="key">Redis Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.ICacheLocker.LockAsync(System.String,System.String)">
+            <summary>
+            Lock Redis資料
+            </summary>
+            <param name="key">Redis Key</param>
+            <param name="value">列表裡面裡面其中一個值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.ICacheLocker.UnlockAsync(System.String)">
+            <summary>
+            解除Lock Redis資料
+            </summary>
+            <param name="key">Redis Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.IRedisCache.GetAggregates">
+            <summary>
+            取得 Aggregate 裏面所有的 Domain Event
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.IRedisCache.SetHashCacheAsync(System.String,System.String,System.String,System.Int32)">
+            <summary>
+            設定 Hash雜湊對應
+            </summary>
+            <param name="key">Redis紀錄Key</param>
+            <param name="field">Redis此記錄Key底下的Identity</param>
+            <param name="json">儲存的物件</param>
+            <param name="expireSeconds">過期日子</param>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.IRedisCache.SetHashCacheAsync``1(System.String,System.String,``0,System.Int32)">
+            <summary>
+            設定 Hash雜湊對應
+            </summary>
+            <param name="key">Redis紀錄Key</param>
+            <param name="field">Redis此記錄Key底下的Identity</param>
+            <param name="json">儲存的物件</param>
+            <param name="expireSeconds">過期日子</param>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.IRedisCache.GetHashCacheAsync``1(System.String,System.String)">
+            <summary>
+            取得 Hash雜湊物件
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">Redis紀錄Key</param>
+            <param name="field">Redis此記錄Key底下的Identity</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.IRedisCache.GetHashCacheAsync``1(System.String)">
+            <summary>
+            從 HashSet 中重組 Object
+            </summary>
+            <param name="key"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.IRedisCache.SetHashCacheAsync``1(System.String,``0,System.Int32)">
+            <summary>
+            Object 儲存成 HashSet
+            </summary>
+            <param name="key"></param>
+            <param name="obj"></param>
+            <param name="expireSeconds"></param>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.IRedisCache.SortedSetIncrementAsync(System.String,System.String,System.Double)">
+            <summary>
+            排行資料增加分數
+            </summary>
+            <param name="key">Key</param>
+            <param name="value">唯一值</param>
+            <param name="addNum">如果存在唯一值則+1，不存在則建立增加並變成1</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.IRedisCache.SortedSetDecrementAsync(System.String,System.String,System.Double)">
+            <summary>
+            排行資料減少分數
+            </summary>
+            <param name="key">Key</param>
+            <param name="value">唯一值</param>
+            <param name="addNum">如果存在唯一值則-1，不存在則建立增加並變成-1</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.IRedisCache.GetSortedSetScoreAsync(System.String,System.String)">
+            <summary>
+            取得排行資料其中一位資料
+            </summary>
+            <param name="key">Key</param>
+            <param name="value">唯一值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.IRedisCache.RemoveCacheAsync(System.String)">
+            <summary>
+            刪除資料
+            </summary>
+            <param name="key">Redis Key</param>
+            <returns></returns>
+        </member>
+        <member name="F:Auth.Infrastructure.Redis.RedisCache._redisConn">
+            <summary>
+            ConnectionMultiplexer
+            </summary>
+        </member>
+        <member name="F:Auth.Infrastructure.Redis.RedisCache._aggregates">
+            <summary>
+            Aggregates
+            </summary>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.RedisCache.#ctor(StackExchange.Redis.ConnectionMultiplexer)">
+            <summary>
+            RedisCache
+            </summary>
+            <param name="redisConn"></param>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.RedisCache.GetAggregates">
+            <summary>
+            取得 Aggregate 裏面所有的 Domain Event
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.RedisCache.IsKeyExist(System.String)">
+            <summary>
+            鍵值是否存在
+            </summary>
+            <param name="hashKey">Redis Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.RedisCache.SetExpiredKey(System.String,System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            寫入Cache 有時效性
+            </summary>
+            <param name="hashKey">Redis Key</param>
+            <param name="hour">小時</param>
+            <param name="minute">分</param>
+            <param name="second">秒</param>
+            <param name="json">Json資料</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.RedisCache.GetObjectAsync``1(System.String)">
+            <summary>
+            取得Cache內容
+            </summary>
+            <typeparam name="T">轉換的物件</typeparam>
+            <param name="key">Redis Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.RedisCache.GetObject``1(System.String)">
+            <summary>
+            取得Cache內容
+            </summary>
+            <typeparam name="T">轉換的物件</typeparam>
+            <param name="key">Redis Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.RedisCache.RemoveCacheAsync(System.String)">
+            <summary>
+            刪除資料
+            </summary>
+            <param name="key">Redis Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.RedisCache.RemoveCache(System.String)">
+            <summary>
+            刪除資料
+            </summary>
+            <param name="key">Redis Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.RedisCache.SetCacheAsync``1(System.String,``0,System.TimeSpan)">
+            <summary>
+            寫入Cache 有時效性
+            </summary>
+            <typeparam name="T">轉換的物件</typeparam>
+            <param name="key">Redis Key</param>
+            <param name="obj">轉換的物件</param>
+            <param name="expiry">多久過期</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.RedisCache.SetCache``1(System.String,``0,System.TimeSpan)">
+            <summary>
+            寫入Cache 有時效性
+            </summary>
+            <typeparam name="T">轉換的物件</typeparam>
+            <param name="key">Redis Key</param>
+            <param name="obj">轉換的物件</param>
+            <param name="expiry">多久過期</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.RedisCache.LPushList(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            LPUSH List 加入列表內
+            </summary>
+            <param name="key">Redis Key</param>
+            <param name="objs">要加入之列表</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.RedisCache.LPushListAsync(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            LPUSH Async List 加入列表內
+            </summary>
+            <param name="key">Redis Key</param>
+            <param name="objs">要加入之列表</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.RedisCache.LPush(System.String,System.String)">
+            <summary>
+            LPUSH String 加入列表內
+            </summary>
+            <param name="key">Redis Key</param>
+            <param name="str">要推送一筆的內容</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.RedisCache.LPushAsync(System.String,System.String)">
+            <summary>
+            LPUSH Async String 加入列表內
+            </summary>
+            <param name="key">Redis Key</param>
+            <param name="str">要推送一筆的內容</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.RedisCache.LPop(System.String)">
+            <summary>
+            LPOP String 取出一筆
+            </summary>
+            <param name="key">Redis Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.RedisCache.LPopAsync(System.String)">
+            <summary>
+            LPOP Async String 取出一筆
+            </summary>
+            <param name="key">Redis Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.RedisCache.LLengthAsync(System.String)">
+            <summary>
+            LRange Length 取得長度
+            </summary>
+            <param name="key">Redis Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.RedisCache.LLength(System.String)">
+            <summary>
+            LRange Length 取得長度
+            </summary>
+            <param name="key">Redis Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.RedisCache.LockAsync(System.String,System.String)">
+            <summary>
+            Lock Redis資料
+            </summary>
+            <param name="key">Redis Key</param>
+            <param name="value">列表裡面裡面其中一個值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.RedisCache.UnlockAsync(System.String)">
+            <summary>
+            解除Lock Redis資料
+            </summary>
+            <param name="key">Redis Key</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.RedisCache.SetKeyExpiredAsync(System.String,System.Nullable{System.DateTime})">
+            <summary>
+            設定Redis資料過期時間
+            </summary>
+            <param name="key">Redis Key</param>
+            <param name="expiredTime">過期時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.RedisCache.SetKeyExpiredAsync(System.String,System.Nullable{System.TimeSpan})">
+            <summary>
+            設定Redis資料過期時間
+            </summary>
+            <param name="key">Redis Key</param>
+            <param name="expiredTime">過期時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.RedisCache.SetKeyExpired(System.String,System.Nullable{System.DateTime})">
+            <summary>
+            設定Redis資料過期時間
+            </summary>
+            <param name="key">Redis Key</param>
+            <param name="expiredTime">過期時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.RedisCache.SetKeyExpired(System.String,System.Nullable{System.TimeSpan})">
+            <summary>
+            設定Redis資料過期時間
+            </summary>
+            <param name="key">Redis Key</param>
+            <param name="expiredTime">過期時間</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.RedisCache.SetHashCacheAsync(System.String,System.String,System.String,System.Int32)">
+            <summary>
+            設定 Hash雜湊對應
+            </summary>
+            <param name="key">Redis紀錄Key</param>
+            <param name="field">Redis此記錄Key底下的Identity</param>
+            <param name="json">儲存的物件</param>
+            <param name="expireSeconds">過期日子</param>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.RedisCache.SetHashCacheAsync``1(System.String,System.String,``0,System.Int32)">
+            <summary>
+            設定 Hash雜湊對應
+            </summary>
+            <param name="key">Redis紀錄Key</param>
+            <param name="field">Redis此記錄Key底下的Identity</param>
+            <param name="json">儲存的物件</param>
+            <param name="expireSeconds">過期日子</param>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.RedisCache.GetHashCacheAsync``1(System.String,System.String)">
+            <summary>
+            取得 Hash雜湊物件
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">Redis紀錄Key</param>
+            <param name="field">Redis此記錄Key底下的Identity</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.RedisCache.GetHashCacheAsync``1(System.String)">
+            <summary>
+            從 HashSet 中重組 Object
+            </summary>
+            <param name="key"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.RedisCache.SetHashCacheAsync``1(System.String,``0,System.Int32)">
+            <summary>
+            Object 儲存成 HashSet
+            </summary>
+            <param name="key"></param>
+            <param name="obj"></param>
+            <param name="expireSeconds"></param>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.RedisCache.HashEntryArrayToObject``1(StackExchange.Redis.HashEntry[])">
+            <summary>
+            HashEntries 轉成 Object
+            </summary>
+            <param name="hashEntries"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.RedisCache.ConvertToHashEntryArray(System.Object)">
+            <summary>
+            Object 轉換成 HashEntryList 方便儲存到 Hash Set 當中
+            </summary>
+            <param name="instance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.RedisCache.SortedSetIncrementAsync(System.String,System.String,System.Double)">
+            <summary>
+            排行資料增加分數
+            </summary>
+            <param name="key">Key</param>
+            <param name="value">唯一值</param>
+            <param name="addNum">如果存在唯一值則+1，不存在則建立增加並變成1</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.RedisCache.SortedSetDecrementAsync(System.String,System.String,System.Double)">
+            <summary>
+            排行資料減少分數
+            </summary>
+            <param name="key">Key</param>
+            <param name="value">唯一值</param>
+            <param name="addNum">如果存在唯一值則-1，不存在則建立增加並變成-1</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Redis.RedisCache.GetSortedSetScoreAsync(System.String,System.String)">
+            <summary>
+            取得排行資料其中一位資料
+            </summary>
+            <param name="key">Key</param>
+            <param name="value">唯一值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Services.EmailMediator.StaffRegistrationAsync(System.String,System.Int32)">
+            <summary>
+            發送 - 驗證碼 - 後台人員註冊
+            </summary>
+            <param name="email"></param>
+            <param name="code"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Services.EmailMediator.RegistrationWithEmailAsync(System.String,System.Int32)">
+            <summary>
+            發送 - 郵箱 - 驗證碼
+            </summary>
+            <param name="email"></param>
+            <param name="code"></param>
+        </member>
+        <member name="M:Auth.Infrastructure.Services.EmailMediator.UpdatePasswordAsync(System.String,System.Int32)">
+            <summary>
+            發送 - 驗證 - 更新密碼
+            </summary>
+            <param name="email"></param>
+            <param name="code"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Services.EmailMediator.SendEmployeePasswordAsync(System.String,System.String,System.String)">
+            <summary>
+            發送 - 新成員初始密碼
+            </summary>
+            <param name="email"></param>
+            <param name="newMemberName"></param>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="F:Auth.Infrastructure.Services.IdentityProducer.StartTimeStamp">
+            <summary>
+            起始的時間戳:唯一時間，這是一個避免重復的隨機量，自行設定不要大于當前時間戳，
+            一個計時周期表示一百納秒，即一千萬分之一秒， 1 毫秒內有 10,000 個計時周期，即 1 秒內有 1,000 萬個計時周期，
+            </summary>
+        </member>
+        <member name="M:Auth.Infrastructure.Services.IdentityProducer.GetNextMill">
+            <summary>
+            取得詞間戳
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Services.IdentityProducer.GetNewTimeStamp">
+            <summary>
+            產生新的時間戳
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Services.IdentityProducer.#ctor(System.Int64,System.Int64)">
+            <summary>
+            根據指定的資料中心ID和機器標志ID生成指定的序列號
+            </summary>
+            <param name="dataCenterId">資料中心ID</param>
+            <param name="machineId">機器標志ID</param>
+        </member>
+        <member name="M:Auth.Infrastructure.Services.IdentityProducer.GetId">
+            <summary>
+            產生下一個ID
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Auth.Infrastructure.Services.PasswordGenerator.Generate">
+            <summary>
+            亂數產生密碼
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Auth.Infrastructure.Services.SendGridSettings.Key">
+            <summary>
+            Secret Key
+            </summary>
+        </member>
+    </members>
+</doc>
