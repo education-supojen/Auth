@@ -15,4 +15,5 @@ publish:
 
 release:
 	git tag ${VERSION}
+	git push
 	git push origin ${VERSION}
