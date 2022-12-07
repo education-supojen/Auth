@@ -26,6 +26,9 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Set current date as env variable
+        run: echo "NOW=$(date + '%Y-%m-%d_%H-%M')" >> $GITHUB_ENV
       
       # description - Docker meta
       - name: Docker meta

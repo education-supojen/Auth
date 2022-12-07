@@ -1,4 +1,4 @@
-VERSION:=V1.0.1
+VERSION:=V1.0.3
 IMAGE_NAME:=supojen/education-auth:${VERSION}
 
 compile:
@@ -15,5 +15,4 @@ publish:
 
 release:
 	git tag ${VERSION}
-	git push
 	git push origin ${VERSION}
