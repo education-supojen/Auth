@@ -44,7 +44,7 @@ jobs:
       # description - build the application
       - name: Publish dotnet application (if need it)
         run: | 
-          if[!-d "./compile"]; then
+          if [!-d "./compile"]; then
             make publish
           fi
 
