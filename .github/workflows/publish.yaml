@@ -39,11 +39,14 @@ jobs:
           images: supojen/education-auth
           tags: |
             type=semver,pattern={{raw}}
-            type=sha,prefix=,format=short
+            type=sha,prefix=${{env.NOW}},format=short
       
       # description - build the application
       - name: Publish dotnet application (if need it)
-        run: make publish
+        run: |
+          if [!-d "./compile"]; then \
+            make compile \
+          fi
 
       # description - Build and push docker image
       - name: Build and push docker image
