@@ -37,7 +37,7 @@ jobs:
         run: |   
           make version
           echo ${VERSION}
-          echo "version=${VERSION}" >> $GITHUB_ENV
+          echo "VERSION=${VERSION}" >> $GITHUB_ENV
 
       # description - Docker meta
       - name: Docker meta
@@ -47,7 +47,7 @@ jobs:
           images: supojen/education-auth
           tags: |
             type=semver,pattern={{raw}}
-            type=sha,prefix=${{env.version}},format=short
+            type=sha,prefix=${{env.VERSION}},format=short
       
       # description - build the application
       - name: Build application
