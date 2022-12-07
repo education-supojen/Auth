@@ -32,6 +32,13 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       
+      # description - 取得版本號
+      - name: Get Version Number
+        run: |   
+          make version
+          echo ${VERSION}
+          echo "version=${VERSION}" >> $GITHUB_ENV
+
       # description - Docker meta
       - name: Docker meta
         id: meta
@@ -40,18 +47,8 @@ jobs:
           images: supojen/education-auth
           tags: |
             type=semver,pattern={{raw}}
-            type=sha,prefix=,format=short
-
-      # description - 取得版本號
-      #- name: Get Version Number
-      #  run: |   
-      #    make version
-      #    echo "version=${VERSION}" >> $GITHUB_ENV
+            type=sha,prefix=${env.version},format=short
       
-      # description - 測試版本號是否有成功被設定
-      - name:  Test env variable
-        run: env
-
       # description - build the application
       - name: Build application
         run: make compile
