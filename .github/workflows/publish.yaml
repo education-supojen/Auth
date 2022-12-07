@@ -47,7 +47,7 @@ jobs:
           images: supojen/education-auth
           tags: |
             type=semver,pattern={{raw}}
-            type=sha,prefix=${{env.VERSION}},format=short
+            type=sha,prefix=,format=short
       
       # description - build the application
       - name: Build application
@@ -60,5 +60,6 @@ jobs:
           context: . 
           push: true
           tags: ${{ steps.meta.outputs.tags }}
+
 
 
