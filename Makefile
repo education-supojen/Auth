@@ -1,6 +1,9 @@
 VERSION:=V1.0.3
 IMAGE_NAME:=supojen/education-auth:${VERSION}
 
+version:
+	echo ${VERSION}
+
 publish:
 	dotnet publish src/Auth.Presentation/Auth.Presentation.csproj -r linux-x64 --self-contained false --configuration Release -o compile 
 	
