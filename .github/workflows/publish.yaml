@@ -1,9 +1,6 @@
 name: Publish
 
 on:
-  push:
-    tags:
-      - "v*"
   pull_request:
     branches:
     - develop
@@ -32,13 +29,6 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       
-      # description - 取得版本號
-      #- name: Get Version Number
-      #  run: |   
-      #    make version
-      #    echo ${VERSION}
-      #    echo "VERSION=${VERSION}" >> $GITHUB_ENV
-
       # description - Docker meta
       - name: Docker meta
         id: meta
@@ -51,7 +41,7 @@ jobs:
       
       # description - build the application
       - name: Build application
-        run: make compile
+        uses: ./.github/actions/publish
 
       # description - Build and push docker image
       - name: Build and push docker image

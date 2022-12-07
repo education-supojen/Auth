@@ -1,0 +1,12 @@
+name: 'dotnet publish'
+description: 'publish dotnet application' 
+runs:
+  using: composite
+  steps:
+
+    - name: Publish dotnet application (if need it)
+      shell: run
+      run: |
+        if [!-d "./compile"]; then
+          make compile          
+        fi
