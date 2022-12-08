@@ -53,7 +53,7 @@ jobs:
       # description - Check if compile directory exists
       - name: Check if compile directory exists
         id: check_directory
-        uses: ./github/actions/if_compile_dir_exists
+        uses: ./.github/actions/if_compile_dir_exists
 
       # description - Build and push docker image
       - name: Build and push docker image
