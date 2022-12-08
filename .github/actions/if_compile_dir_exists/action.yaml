@@ -22,4 +22,4 @@ runs:
     - name: Publish dotnet application (if compile directory is not exists)
       if: steps.check_directory.outputs.files_exists == 'false'
       shell: bash
-      run: . ./publish.sh
+      run: dotnet publish src/Auth.Presentation/Auth.Presentation.csproj --configuration Release -o compile
