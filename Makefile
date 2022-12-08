@@ -1,8 +1,8 @@
-VERSIONING:=V1.0.3
+VERSION:=V1.0.3
 IMAGE_NAME:=supojen/education-auth:${VERSION}
 
 version:
-	${VERSIONING}
+	${VERSION}
 
 publish:
 	dotnet restore
@@ -12,5 +12,5 @@ push_image:
 	docker build --rm -t ${IMAGE_NAME} . && docker push ${IMAGE_NAME}
 
 release:
-	git tag ${VERSIONING}
-	git push origin ${VERSIONING}
+	git tag ${VERSION}
+	git push origin ${VERSION}
