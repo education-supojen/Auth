@@ -2,11 +2,9 @@ name: Release
 
 
 on:
-  #push:
-  #  branches:
-  #    - 'develop'
-  #  tags:
-  #    - 'v*'
+  push:
+    tags:
+      - 'v*'
   workflow_dispatch:
       
 jobs:
@@ -35,12 +33,16 @@ jobs:
           tags: |
             type=semver,pattern={{raw}}
       
-      # description - build the application
-      - name: Build application
-        uses: ./.github/actions/publish
+      # description - Check if compile directory exists
+      - name: Check if compile directory exists
+        id: check_directory
+        uses: andstor/file-existence-action@v2
+        with: 
+          files: compile
 
       # description - Build and push docker image
       - name: Build and push docker image
+        if: steps.check_directory.outputs.files_exists == 'true'
         uses: docker/build-push-action@v3
         with:
           context: . 

@@ -48,10 +48,7 @@ jobs:
         with:
           images: supojen/education-auth
           tags: |
-            type=sha,prefix=dev-,format=short
-          labels: |
-            org.opencontainers.image.version=${{env.VERSION}}
-            org.opencontainers.image.created=${{ steps.current-time.outputs.readableTime }}"
+            type=sha,prefix=${{env.VERSION}}-dev-,format=short
 
       # description - Check if compile directory exists
       - name: Check if compile directory exists
