@@ -4,9 +4,6 @@ on:
   push:
     tags:
       - 'v*'
-    branches-ignore:
-      - "main"
-      - "develop"
   workflow_dispatch:
       
 jobs:
