@@ -17,13 +17,17 @@ jobs:
         id: branch-name
         uses: tj-actions/branch-names@v6
 
+      # description - Weather the current branch is develop
+      - name: If branch is not develop, exists
+        if: ${{ steps.meta.outputs.tags }} != 'develop'
+        uses: actions/github-script@v3
+        with:
+          script: |
+            core.setFailed('Release process can only be luanched by develop branch')
+
       # description - get code
       - name: Get Code
         uses: actions/checkout@v3
-
-      # description - doing unit test
-      - name: unit test
-        uses: ./.github/actions/unit_test
       
       # description - login to DockerHub      
       - name: Login To DockerHub
@@ -67,60 +71,4 @@ jobs:
           from_branch: develop
           target_branch: main
           github_token: ${{ github.token }} 
-
-      ## description - 
-      ##     pull request (XXX --> develop)
-      ##     https://github.com/marketplace/actions/github-action-for-creating-pull-requests
-      #- name: Pull Request XXX --> develop
-      #  if: ${{ steps.branch-name.outputs.current_branch }} != 'develop'
-      #  uses: devops-infra/action-pull-request@v0.5.3
-      #  with:
-      #    github_token: ${{ secrets.GITHUB_TOKEN }}
-      #    target_branch: develop
-      #    title: 'release - ${{ github.ref_name }}'
-      #    body: ${{ github.event.head_commit.message }}
-
-      ## description - 
-      ##     pull request (develop --> main)
-      ##     https://github.com/marketplace/actions/github-action-for-creating-pull-requests
-      #- name: Pull Request XXX --> develop
-      #  uses: devops-infra/action-pull-request@v0.5.3
-      #  with:
-      #    github_token: ${{ secrets.GITHUB_TOKEN }}
-      #    source_branch: develop
-      #    target_branch: main
-      #    title: 'release - ${{ github.ref_name }}'
-      #    body: ${{ github.event.head_commit.message }}    
-
-      ## description - 
-      ##     Create Pull Request (xxx branch to develop branch)
-      ##     https://github.com/marketplace/actions/create-pull-request
-      #- name: Create Pull Request (xxx branch to develop branch)
-      #  uses: peter-evans/create-pull-request@v4
-      #  with:
-      #    branch: "develop"
-      #    delete-branch: false
-      #    title: 'release - ${{ github.ref_name }}'
-      #    body:
-      #      ${{ github.event.head_commit.message }}
-      #    team-reviewers: |
-      #      owners
-      #      maintainers
-      #    milestone: 1
-
-      ## description - 
-      ##     Create Pull Request (develop branch to main branch)
-      ##     https://github.com/marketplace/actions/create-pull-request
-      #- name: Create Pull Request (develop branch to main branch)
-      #  uses: peter-evans/create-pull-request@v4
-      #  with:
-      #    branch: "main"
-      #    base: "develop"
-      #    delete-branch: false
-      #    title: 'release - ${{ github.ref_name }}'
-      #    body:
-      #      ${{ github.event.head_commit.message }}
-      #    team-reviewers: |
-      #      owners
-      #      maintainers
-      #    milestone: 1
+          
