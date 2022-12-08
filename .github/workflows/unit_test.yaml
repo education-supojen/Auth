@@ -1,0 +1,55 @@
+name: unit test
+
+# Trigger - 
+#     Pull Request 被建立在 develop 分支時
+on: 
+  pull_request:
+    branches:
+    - develop
+    types: 
+    - opened
+  workflow_dispatch:
+
+jobs:
+
+  # Jobs - Unit Test
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    # description - 
+    #     what is checkout action do, it checks-out your repository under $GITHUB_WORKSPACE, 
+    #     so your workflow can access it.
+    - name: Get Code
+      uses: actions/checkout@v3
+
+    # description - download dotnet 
+    - name: Setup Dotnet
+      uses: actions/setup-dotnet@v3
+      with: 
+        dotnet-version: '6.0.x'
+    
+    # description - restore Dependencies 
+    - name: Restore Dependnecies
+      run: dotnet restore
+    
+    # description - build Solution
+    - name: Build
+      run: dotnet build --no-restore
+    
+    # description - doing the unit test
+    - name: Test
+      run: dotnet test --no-build --logger "trx;LogFileName=test-results.trx"
+
+    # description - 
+    #     test report
+    #     reference: https://github.com/dorny/test-reporter
+    - name: Test Report
+      uses: dorny/test-reporter@v1
+      if: always()
+      with:
+        name: test report
+        path: "**/test-results.trx"
+        reporter: dotnet-trx
+        fail-on-error: true
+
+

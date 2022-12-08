@@ -1,0 +1,37 @@
+name: Unit Test
+description: Run unit Test
+runs:
+  using: composite
+  steps:
+    # description - download dotnet 
+    - name: Setup Dotnet
+      uses: actions/setup-dotnet@v3
+      with: 
+        dotnet-version: '6.0.x'
+    
+    # description - restore Dependencies 
+    - name: Restore Dependnecies
+      shell: bash
+      run: dotnet restore
+    
+    # description - build Solution
+    - name: Build
+      shell: bash
+      run: dotnet build --no-restore
+    
+    # description - doing the unit test
+    - name: Test
+      shell: bash
+      run: dotnet test --no-build --logger "trx;LogFileName=test-results.trx"
+
+    # description - 
+    #     test report
+    #     reference: https://github.com/dorny/test-reporter
+    - name: Report
+      uses: dorny/test-reporter@v1
+      if: always()
+      with:
+        name: test report
+        path: "**/test-results.trx"
+        reporter: dotnet-trx
+        fail-on-error: true
