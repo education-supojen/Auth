@@ -48,7 +48,7 @@ jobs:
         with:
           images: supojen/education-auth
           tags: |
-            type=sha,prefix=$dev-,format=short
+            type=sha,prefix=dev-,format=short
 
       # description - Check if compile directory exists
       - name: Check if compile directory exists
