@@ -48,7 +48,7 @@ jobs:
         with:
           images: supojen/education-auth
           tags: |
-            type=sha,prefix=${{ steps.current-time.outputs.formattedTime }},format=short
+            type=sha,prefix=${{env.VERSION}}-,suffix=-${{ steps.current-time.outputs.formattedTime }},format=short
 
       # description - Check if compile directory exists
       - name: Check if compile directory exists
