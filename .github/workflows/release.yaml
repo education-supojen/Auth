@@ -57,6 +57,17 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
 
+      # description - 
+      #     Merge from develop to main
+      #     https://github.com/marketplace/actions/merge-branch
+      - name: Merge from develop to main
+        uses: devmasx/merge-branch@master
+        with:
+          type: now
+          from_branch: develop
+          target_branch: main
+          github_token: ${{ github.token }} 
+
       ## description - 
       ##     pull request (XXX --> develop)
       ##     https://github.com/marketplace/actions/github-action-for-creating-pull-requests
@@ -69,18 +80,17 @@ jobs:
       #    title: 'release - ${{ github.ref_name }}'
       #    body: ${{ github.event.head_commit.message }}
 
-      # description - 
-      #     pull request (develop --> main)
-      #     https://github.com/marketplace/actions/github-action-for-creating-pull-requests
-      - name: Pull Request XXX --> develop
-        uses: devops-infra/action-pull-request@v0.5.3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          source_branch: develop
-          target_branch: main
-          title: 'release - ${{ github.ref_name }}'
-          body: ${{ github.event.head_commit.message }}    
-
+      ## description - 
+      ##     pull request (develop --> main)
+      ##     https://github.com/marketplace/actions/github-action-for-creating-pull-requests
+      #- name: Pull Request XXX --> develop
+      #  uses: devops-infra/action-pull-request@v0.5.3
+      #  with:
+      #    github_token: ${{ secrets.GITHUB_TOKEN }}
+      #    source_branch: develop
+      #    target_branch: main
+      #    title: 'release - ${{ github.ref_name }}'
+      #    body: ${{ github.event.head_commit.message }}    
 
       ## description - 
       ##     Create Pull Request (xxx branch to develop branch)
