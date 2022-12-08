@@ -57,17 +57,17 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
 
-      # description - 
-      #     pull request (XXX --> develop)
-      #     https://github.com/marketplace/actions/github-action-for-creating-pull-requests
-      - name: Pull Request XXX --> develop
-        if: ${{ steps.branch-name.outputs.current_branch }} != 'develop'
-        uses: devops-infra/action-pull-request@v0.5.3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          target_branch: develop
-          title: 'release - ${{ github.ref_name }}'
-          body: ${{ github.event.head_commit.message }}
+      ## description - 
+      ##     pull request (XXX --> develop)
+      ##     https://github.com/marketplace/actions/github-action-for-creating-pull-requests
+      #- name: Pull Request XXX --> develop
+      #  if: ${{ steps.branch-name.outputs.current_branch }} != 'develop'
+      #  uses: devops-infra/action-pull-request@v0.5.3
+      #  with:
+      #    github_token: ${{ secrets.GITHUB_TOKEN }}
+      #    target_branch: develop
+      #    title: 'release - ${{ github.ref_name }}'
+      #    body: ${{ github.event.head_commit.message }}
 
       # description - 
       #     pull request (develop --> main)
