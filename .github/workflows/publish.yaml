@@ -59,14 +59,14 @@ jobs:
 
       # description - download dotnet (if compile directory is not exists)
       - name: Setup Dotnet (if compile directory is not exists)
-        if: steps.check_directory.outputs.files_exists == 'true'
+        if: steps.check_directory.outputs.files_exists == 'false'
         uses: actions/setup-dotnet@v3
         with: 
           dotnet-version: '6.0.x'
 
       # description - Publish dotnet application (if compile directory is not exists)
       - name: Publish dotnet application (if compile directory is not exists)
-        if: steps.check_directory.outputs.files_exists == 'true'
+        if: steps.check_directory.outputs.files_exists == 'false'
         run: . ./publish.sh
 
       # description - Build and push docker image
