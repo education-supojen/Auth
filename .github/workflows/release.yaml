@@ -1,10 +1,12 @@
 name: Release
 
-
 on:
   push:
     tags:
       - 'v*'
+    branches-ignore:
+      - "main"
+      - "develop"
   workflow_dispatch:
       
 jobs:
@@ -12,6 +14,10 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
+
+      # description - doing unit test
+      - name: unit test
+        uses: ./.github/actions/unit_test
 
       # description - get code
       - name: Get Code
@@ -50,18 +56,34 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
 
       # description - 
-      #     Create Pull Request (develop to main)
+      #     Create Pull Request (xxx branch to develop branch)
       #     https://github.com/marketplace/actions/create-pull-request
-      #- name: Create Pull Request (develop to main)
-      #  uses: peter-evans/create-pull-request@v4
-      #  with:
-      #    branch: main
-      #    delete-branch: false
-      #    title: 'release - ${{ github.ref_name }}'
-      #    body:
-      #      New Release
-      #    team-reviewers: |
-      #      owners
-      #      maintainers
-      #    milestone: 1
+      - name: Create Pull Request (xxx branch to develop branch)
+        uses: peter-evans/create-pull-request@v4
+        with:
+          branch: "develop"
+          delete-branch: false
+          title: 'release - ${{ github.ref_name }}'
+          body:
+            ${{ github.event.head_commit.message }}
+          team-reviewers: |
+            owners
+            maintainers
+          milestone: 1
 
+      # description - 
+      #     Create Pull Request (develop branch to main branch)
+      #     https://github.com/marketplace/actions/create-pull-request
+      - name: Create Pull Request (develop branch to main branch)
+        uses: peter-evans/create-pull-request@v4
+        with:
+          branch: "main"
+          base: "develop"
+          delete-branch: false
+          title: 'release - ${{ github.ref_name }}'
+          body:
+            ${{ github.event.head_commit.message }}
+          team-reviewers: |
+            owners
+            maintainers
+          milestone: 1
