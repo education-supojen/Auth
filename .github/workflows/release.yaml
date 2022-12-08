@@ -15,13 +15,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      # description - doing unit test
-      - name: unit test
-        uses: ./.github/actions/unit_test
-
       # description - get code
       - name: Get Code
         uses: actions/checkout@v3
+
+      # description - doing unit test
+      - name: unit test
+        uses: ./.github/actions/unit_test
       
       # description - login to DockerHub      
       - name: Login To DockerHub

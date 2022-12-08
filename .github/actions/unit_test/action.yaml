@@ -3,12 +3,6 @@ description: Run unit Test
 runs:
   using: composite
   steps:
-    # description - 
-    #     what is checkout action do, it checks-out your repository under $GITHUB_WORKSPACE, 
-    #     so your workflow can access it.
-    - name: Get Code
-      uses: actions/checkout@v3
-
     # description - download dotnet 
     - name: Setup Dotnet
       uses: actions/setup-dotnet@v3
