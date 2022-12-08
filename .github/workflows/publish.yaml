@@ -48,15 +48,21 @@ jobs:
         with:
           images: supojen/education-auth
           tags: |
-            type=sha,prefix=${{env.VERSION}}-,suffix=-${{ steps.current-time.outputs.formattedTime }},format=short
+            type=sha,prefix=dev-,format=short
+          labels: |
+            org.opencontainers.image.version=${{env.VERSION}}
+            org.opencontainers.image.created=${{ steps.current-time.outputs.readableTime }}"
 
       # description - Check if compile directory exists
       - name: Check if compile directory exists
         id: check_directory
-        uses: ./.github/actions/if_compile_dir_exists
+        uses: andstor/file-existence-action@v2
+        with: 
+          files: compile
 
-      # description - Build and push docker image
+      # description - Build and push docker image (if compile folder exists)
       - name: Build and push docker image
+        if: steps.check_directory.outputs.files_exists == 'true'
         uses: docker/build-push-action@v3
         with:
           context: . 
