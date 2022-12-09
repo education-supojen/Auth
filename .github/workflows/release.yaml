@@ -8,22 +8,54 @@ on:
       
 jobs:
 
+  #- name: Branch used
+  #  id: extract_branch
+  #  run: |
+  #    if [[ "${GITHUB_EVENT_NAME}" == "push" ]]; then
+  #      echo "::set-output name=branch::$(echo ${GITHUB_REF##*/})"
+  #    elif [[ "${GITHUB_EVENT_NAME}" == "pull_request" ]]; then
+  #      echo "::set-output name=branch::$(echo $GITHUB_BASE_REF)"
+  #    else
+  #      echo "::set-output name=branch::INVALID_EVENT_BRANCH_UNKNOWN"
+  #    fi
+
+
   release:
     runs-on: ubuntu-latest
     steps:
 
-      # description - Get branch names
-      - name: Get branch names
-        id: branch-name
-        uses: tj-actions/branch-names@v6
+      # description -
+      #     Get branch name
+      - name: Get branch name
+        id: extract_branch
+        run: |
+          if [[ "${GITHUB_EVENT_NAME}" == "push" ]]; then
+            echo 'branch=${GITHUB_REF##*/}' >> $GITHUB_OUTPUT
+          fi
 
-      # description - Weather the current branch is develop
-      - name: If branch is not develop, exists
-        if: ${{ steps.meta.outputs.tags }} != 'develop'
-        uses: actions/github-script@v3
-        with:
-          script: |
-            core.setFailed('Release process can only be luanched by develop branch')
+      - name: Display branch name
+        run: echo ${{ steps.extract_branch.outputs.branch }}
+
+
+      ## description - 
+      ##     Get branch names
+      ##     https://github.com/marketplace/actions/branch-names
+      #- name: Get branch names
+      #  id: branch-name
+      #  uses: tj-actions/branch-names@v6
+
+      ## description - display branch name
+      #- name: Display branch name
+      #  run: echo "${{ steps.branch-name.outputs.current_branch }}"
+
+
+      ## description - Weather the current branch is develop
+      #- name: If branch is not develop, exists
+      #  if: ${{ steps.branch-name.outputs.current_branch }}" != 'develop'
+      #  uses: actions/github-script@v3
+      #  with:
+      #    script: |
+      #      core.setFailed('Release process can only be luanched by develop branch')
 
       # description - get code
       - name: Get Code
