@@ -22,7 +22,7 @@ jobs:
           fetch-depth: 0
 
       - name: Get current branch
-        id: check_step
+        id: check
         run: |
           raw=$(git branch -r --contains ${{ github.ref }})
           branch=${raw##*/}
