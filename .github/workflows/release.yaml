@@ -9,7 +9,7 @@ on:
 jobs:
 
 
-  check_branch:
+  check:
     runs-on: ubuntu-latest
     outputs:
       branch: ${{ steps.check_step.outputs.branch }}
@@ -22,7 +22,7 @@ jobs:
           fetch-depth: 0
 
       - name: Get current branch
-        id: check
+        id: check_step
         run: |
           raw=$(git branch -r --contains ${{ github.ref }})
           branch=${raw##*/}
