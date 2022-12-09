@@ -8,54 +8,36 @@ on:
       
 jobs:
 
-  #- name: Branch used
-  #  id: extract_branch
-  #  run: |
-  #    if [[ "${GITHUB_EVENT_NAME}" == "push" ]]; then
-  #      echo "::set-output name=branch::$(echo ${GITHUB_REF##*/})"
-  #    elif [[ "${GITHUB_EVENT_NAME}" == "pull_request" ]]; then
-  #      echo "::set-output name=branch::$(echo $GITHUB_BASE_REF)"
-  #    else
-  #      echo "::set-output name=branch::INVALID_EVENT_BRANCH_UNKNOWN"
-  #    fi
+
+  check_branch:
+    runs-on: ubuntu-latest
+    outputs:
+      branch: ${{ steps.check_step.outputs.branch }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          # Number of commits to fetch. 0 indicates all history for all branches and tags.
+          # Default: 1
+          fetch-depth: 0
+
+      - name: Get current branch
+        id: check_step
+        run: |
+          raw=$(git branch -r --contains ${{ github.ref }})
+          branch=${raw##*/}
+          echo 'branch=${branch}' >> $GITHUB_OUTPUT
+          echo 'Branch is $branch'
 
 
   release:
     runs-on: ubuntu-latest
+    needs: check 
+    if: ${{ needs.check.outputs.branch == 'develop' }}
     steps:
 
-      # description -
-      #     Get branch name
-      - name: Get branch name
-        id: extract_branch
-        run: |
-          if [[ "${GITHUB_EVENT_NAME}" == "push" ]]; then
-            echo 'branch=${GITHUB_REF#refs/heads}' >> $GITHUB_OUTPUT
-          fi
-
-      - name: Display branch name
-        run: echo ${{ github.head_ref }}
-
-
-      ## description - 
-      ##     Get branch names
-      ##     https://github.com/marketplace/actions/branch-names
-      #- name: Get branch names
-      #  id: branch-name
-      #  uses: tj-actions/branch-names@v6
-
-      ## description - display branch name
-      #- name: Display branch name
-      #  run: echo "${{ steps.branch-name.outputs.current_branch }}"
-
-
-      ## description - Weather the current branch is develop
-      #- name: If branch is not develop, exists
-      #  if: ${{ steps.branch-name.outputs.current_branch }}" != 'develop'
-      #  uses: actions/github-script@v3
-      #  with:
-      #    script: |
-      #      core.setFailed('Release process can only be luanched by develop branch')
+      - name: Echo branch
+        run: echo '${{ github.event.base_ref }}'
 
       # description - get code
       - name: Get Code
