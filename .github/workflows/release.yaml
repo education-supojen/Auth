@@ -19,13 +19,18 @@ jobs:
         id: branch-name
         uses: tj-actions/branch-names@v6
 
-      # description - Weather the current branch is develop
-      - name: If branch is not develop, exists
-        if: ${{ steps.branch-name.outputs.current_branch }}" != 'develop'
-        uses: actions/github-script@v3
-        with:
-          script: |
-            core.setFailed('Release process can only be luanched by develop branch')
+      # description - display branch name
+      - name: Display branch name
+        run: echo ${{ steps.branch-name.outputs.current_branch }}"
+
+
+      ## description - Weather the current branch is develop
+      #- name: If branch is not develop, exists
+      #  if: ${{ steps.branch-name.outputs.current_branch }}" != 'develop'
+      #  uses: actions/github-script@v3
+      #  with:
+      #    script: |
+      #      core.setFailed('Release process can only be luanched by develop branch')
 
       # description - get code
       - name: Get Code
