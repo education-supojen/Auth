@@ -9,6 +9,7 @@ on:
 jobs:
 
 
+  # Job - 取得 Current Branch 名稱
   check:
     runs-on: ubuntu-latest
     outputs:
@@ -29,14 +30,12 @@ jobs:
           echo 'branch=${{ github.event.base_ref }}' >> $GITHUB_OUTPUT
           echo 'Branch is $branch'
 
+  # Job - 若 Current Branch 是 develop, 釋出版本
   release:
     runs-on: ubuntu-latest
     needs: check 
     if: ${{ needs.check.outputs.branch == 'refs/heads/develop' }}
     steps:
-
-      - name: Echo branch
-        run: echo '${{ github.event.base_ref }}'
 
       # description - get code
       - name: Get Code

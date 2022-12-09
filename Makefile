@@ -1,4 +1,4 @@
-VERSION:=v1.0.12
+VERSION:=v1.0.25
 IMAGE_NAME:=supojen/education-auth:${VERSION}
 
 version:
