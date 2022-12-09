@@ -4,8 +4,6 @@ on:
   push:
     tags:
       - 'v*'
-    branches:
-      - "develop"
   workflow_dispatch:
       
 jobs:
@@ -32,11 +30,11 @@ jobs:
         id: extract_branch
         run: |
           if [[ "${GITHUB_EVENT_NAME}" == "push" ]]; then
-            echo 'branch=${GITHUB_REF##*/}' >> $GITHUB_OUTPUT
+            echo 'branch=${GITHUB_REF#refs/heads}' >> $GITHUB_OUTPUT
           fi
 
       - name: Display branch name
-        run: echo ${{ steps.extract_branch.outputs.branch }}
+        run: echo ${{ github.head_ref }}
 
 
       ## description - 
