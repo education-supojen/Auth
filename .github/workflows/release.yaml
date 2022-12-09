@@ -26,17 +26,13 @@ jobs:
         run: |
           raw=$(git branch -r --contains ${{ github.ref }})
           branch=${raw/origin\/}
-          echo 'branch=${branch}' >> $GITHUB_OUTPUT
+          echo 'branch=${{ github.event.base_ref }}' >> $GITHUB_OUTPUT
           echo 'Branch is $branch'
-
-      - name: Echo branch
-        run: echo '${{ github.event.base_ref }}'
-
 
   release:
     runs-on: ubuntu-latest
     needs: check 
-    if: ${{ needs.check.outputs.branch == 'develop' }}
+    if: ${{ needs.check.outputs.branch == 'refs/heads/develop' }}
     steps:
 
       - name: Echo branch
