@@ -21,7 +21,7 @@ jobs:
 
       # description - display branch name
       - name: Display branch name
-        run: echo ${{ steps.branch-name.outputs.current_branch }}"
+        run: echo "${{ steps.branch-name.outputs.current_branch }}"
 
 
       ## description - Weather the current branch is develop
