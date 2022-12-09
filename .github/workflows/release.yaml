@@ -25,9 +25,12 @@ jobs:
         id: check_step
         run: |
           raw=$(git branch -r --contains ${{ github.ref }})
-          branch=${raw##*/}
+          branch=${raw/origin\/}
           echo 'branch=${branch}' >> $GITHUB_OUTPUT
           echo 'Branch is $branch'
+
+      - name: Echo branch
+        run: echo '${{ github.event.base_ref }}'
 
 
   release:
