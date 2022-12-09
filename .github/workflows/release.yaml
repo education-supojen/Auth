@@ -4,6 +4,8 @@ on:
   push:
     tags:
       - 'v*'
+    branches:
+      - "develop"
   workflow_dispatch:
       
 jobs:
@@ -24,24 +26,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Set env.BRANCH
-        run: echo "BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3)" >> $GITHUB_ENV
+      # description -
+      #     Get branch name
+      - name: Get branch name
+        id: extract_branch
+        run: |
+          if [[ "${GITHUB_EVENT_NAME}" == "push" ]]; then
+            echo 'branch=${GITHUB_REF##*/}' >> $GITHUB_OUTPUT
+          fi
 
-      - name: Is develop?
-        if: env.BRANCH == 'develop'
-        run: echo "This is 'develop' branch"
-
-      ## description -
-      ##     Get branch name
-      #- name: Get branch name
-      #  id: extract_branch
-      #  run: |
-      #    if [[ "${GITHUB_EVENT_NAME}" == "push" ]]; then
-      #      echo 'branch=${GITHUB_REF##*/}' >> $GITHUB_OUTPUT
-      #    fi
-
-      #- name: Display branch name
-      #  run: echo ${{ steps.extract_branch.outputs.branch }}
+      - name: Display branch name
+        run: echo ${{ steps.extract_branch.outputs.branch }}
 
 
       ## description - 
